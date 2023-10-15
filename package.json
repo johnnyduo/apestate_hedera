@@ -1,6 +1,5 @@
 {
   "name": "qash_react",
-  "homepage": "https://qkit.io/demo/qash_react/",
   "version": "0.1.0",
   "private": true,
   "dependencies": {
