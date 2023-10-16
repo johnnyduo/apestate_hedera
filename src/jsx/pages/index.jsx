@@ -60,7 +60,7 @@ const Dashboard = () => {
                         </div>
                         <div className="col-xxl-4 col-xl-4 col-lg-6">
                             <div className="price-widget bg-btc">
-                                <Link to={"/price-details"}>
+                                <Link className={"carousel"} to={"/price-details"}>
                                     <div className="price-content">
                                         <div className="icon-title">
                                             <i className="cc BTC-alt"></i>
@@ -74,7 +74,7 @@ const Dashboard = () => {
                         </div>
                         <div className="col-xxl-4 col-xl-4 col-lg-6">
                             <div className="price-widget bg-eth">
-                                <Link to={"/price-details"}>
+                                <Link className={"carousel"} to={"/price-details"}>
                                     <div className="price-content">
                                         <div className="icon-title">
                                             <i className="cc ETH-alt"></i>
@@ -88,7 +88,7 @@ const Dashboard = () => {
                         </div>
                         <div className="col-xxl-4 col-xl-4 col-lg-6">
                             <div className="price-widget bg-usdt">
-                                <Link to={"/price-details"}>
+                                <Link className={"carousel"} to={"/price-details"}>
                                     <div className="price-content">
                                         <div className="icon-title">
                                             <i className="cc USDT-alt"></i>
