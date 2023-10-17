@@ -20,7 +20,8 @@ const cripticLayoutAtomWithPersistence = atom(
 export function useLayout() {
   const [layout, setLayout] = useAtom(cripticLayoutAtomWithPersistence);
   return {
-    layout,
+    // layout,
+    layout: LAYOUT_OPTIONS.MINIMAL,
     setLayout,
   };
 }
