@@ -39,7 +39,7 @@ const HomePage: NextPageWithLayout<
 };
 
 HomePage.getLayout = function getLayout(page) {
-  return <MinimalScreen>{page}</MinimalScreen>;
+  return <RootLayout>{page}</RootLayout>;
 };
 
 export default HomePage;
