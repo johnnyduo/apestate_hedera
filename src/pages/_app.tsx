@@ -37,17 +37,17 @@ function CustomApp({ Component, pageProps }: AppPropsWithLayout) {
           name="viewport"
           content="width=device-width, initial-scale=1 maximum-scale=1"
         />
-        <title>Criptic - React Next Web3 NFT Crypto Dashboard Template</title>
+        <title>Real Apestate - Real World Asset Trading Platform</title>
       </Head>
       <ThemeProvider
         attribute="class"
         enableSystem={false}
-        defaultTheme="light"
+        defaultTheme="dark" //dark
       >
         <WalletProvider>
           {/* <div className={`${firaCode.variable} font-body`}> */}
           {getLayout(<Component {...pageProps} />)}
-          <SettingsButton />
+          {/* <SettingsButton /> */}
           <SettingsDrawer />
           <ModalsContainer />
           <DrawersContainer />
