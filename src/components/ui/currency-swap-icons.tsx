@@ -6,16 +6,16 @@ import { Usdc } from '@/components/icons/usdc';
 import { Cardano } from '@/components/icons/cardano';
 import { Doge } from '@/components/icons/doge';
 
-export type CoinList = 'BTC' | 'ETH' | 'USDT' | 'BNB' | 'USDC' | 'ADA' | 'DOGE';
+export type CoinList = 'PYT' | 'BKP' | 'TLR' | 'STN' | 'USDC' | 'LPO' | 'THB';
 
 const coinIcons: Record<CoinList, JSX.Element> = {
-  BTC: <Bitcoin />,
-  ETH: <Ethereum />,
-  USDT: <Tether />,
-  BNB: <Bnb />,
+  PYT: <Bitcoin />,
+  BKP: <Ethereum />,
+  TLR: <Tether />,
+  STN: <Bnb />,
   USDC: <Usdc />,
-  ADA: <Cardano />,
-  DOGE: <Doge />,
+  LPO: <Cardano />,
+  THB: <Doge />,
 };
 
 interface CurrencySwapIconsProps {

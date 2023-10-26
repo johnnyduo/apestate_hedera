@@ -7,19 +7,21 @@ import { Bitcoin } from '@/components/icons/bitcoin';
 import { Tether } from '@/components/icons/tether';
 import { Bnb } from '@/components/icons/bnb';
 import { Cardano } from '@/components/icons/cardano';
+import { Border } from '@/components/icons/border';
 
+///minimal 
 export const priceFeedData = [
   {
     id: '0',
-    name: 'Bitcoin',
-    symbol: 'BTC',
+    name: 'PhayaThai',
+    symbol: 'PYT',
     balance: '0.2231345',
     usdBalance: '11,032.24',
     logo: BitcoinImage,
     change: '+12.5%',
     isChangePositive: true,
     color: '#FDEDD4',
-    icon: <Bitcoin />,
+    icon: <Border />,
     prices: [
       { name: 1, value: 15187.44 },
       { name: 2, value: 21356.99 },
@@ -34,8 +36,8 @@ export const priceFeedData = [
   },
   {
     id: '1',
-    name: 'Tether',
-    symbol: 'USDT',
+    name: 'Thonglor',
+    symbol: 'TLR',
     balance: '1.2345',
     usdBalance: '1,032.24',
     logo: TetherImage,
@@ -57,8 +59,8 @@ export const priceFeedData = [
   },
   {
     id: '2',
-    name: 'Cardano',
-    symbol: 'ADA',
+    name: 'LatPhrao',
+    symbol: 'LPO',
     balance: '1.2370',
     usdBalance: '532.94',
     logo: CardanoImage,
@@ -80,8 +82,8 @@ export const priceFeedData = [
   },
   {
     id: '3',
-    name: 'Binance',
-    symbol: 'BUSD',
+    name: 'Sathon',
+    symbol: 'STN',
     balance: '240.55',
     usdBalance: '340.24',
     logo: BinanceImage,

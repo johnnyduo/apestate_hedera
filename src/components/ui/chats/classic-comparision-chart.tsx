@@ -11,6 +11,7 @@ import {
 } from 'recharts';
 import { Bitcoin } from '@/components/icons/bitcoin';
 import { EthereumDark } from '@/components/icons/ethereum-dark';
+import { Doge } from '@/components/icons/doge';
 import { SwapIcon } from '@/components/icons/swap-icon';
 import { Refresh } from '@/components/icons/refresh';
 import Button from '@/components/ui/button';
@@ -108,7 +109,7 @@ export default function ComparisonChart() {
                 )}
               >
                 <Bitcoin className="h-auto w-7 lg:w-9" />
-                <EthereumDark className="h-auto w-7 lg:w-9" />
+                <Doge className="h-auto w-7 lg:w-9" />
               </span>
               <span
                 className={cn(

@@ -9,26 +9,26 @@ import { Doge } from '@/components/icons/doge';
 export const TopTokensData = [
   {
     icon: <Bitcoin />,
-    code: 'BTC',
-    name: 'Bitcoin',
+    code: 'PYT',
+    name: 'PhayaThai',
     volume: '256.5M',
   },
   {
     icon: <Ethereum />,
-    code: 'ETH',
-    name: 'Ethereum',
+    code: 'BKP',
+    name: 'Bangkapi',
     volume: '740.7M',
   },
   {
     icon: <Tether />,
-    code: 'USDT',
-    name: 'Tether USD',
+    code: 'TLR',
+    name: 'Thonglor',
     volume: '566.2M',
   },
   {
     icon: <Bnb />,
-    code: 'BNB',
-    name: 'Binance Coin',
+    code: 'STN',
+    name: 'Sathorn',
     volume: '396.4M',
   },
   {
@@ -39,47 +39,47 @@ export const TopTokensData = [
   },
   {
     icon: <Cardano />,
-    code: 'ADA',
-    name: 'Cardano',
+    code: 'LPO',
+    name: 'LatPrao',
     volume: '267.3M',
   },
   {
     icon: <Doge />,
-    code: 'DOGE',
-    name: 'Doge Coin',
+    code: 'THB',
+    name: 'Thai Baht',
     volume: '421.9M',
   },
 ];
 
 export const TopPoolsData = [
   {
-    from: 'BTC',
+    from: 'PYT',
     to: 'USDC',
     volume: '434.2M',
   },
   {
-    from: 'USDT',
-    to: 'DOGE',
+    from: 'TLR',
+    to: 'THB',
     volume: '356.4M',
   },
   {
-    from: 'ADA',
-    to: 'BNB',
+    from: 'LPO',
+    to: 'STN',
     volume: '295.6M',
   },
   {
-    from: 'USDT',
+    from: 'TLR',
     to: 'USDC',
     volume: '402.5M',
   },
   {
-    from: 'ETH',
-    to: 'DOGE',
+    from: 'BKP',
+    to: 'THB',
     volume: '590.2M',
   },
   {
-    from: 'BTC',
-    to: 'ADA',
+    from: 'PYT',
+    to: 'LPO',
     volume: '104.6M',
   },
 ];
