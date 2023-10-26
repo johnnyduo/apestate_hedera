@@ -11,6 +11,7 @@ import {
 } from 'recharts';
 import { Bitcoin } from '@/components/icons/bitcoin';
 import { EthereumDark } from '@/components/icons/ethereum-dark';
+import { Doge } from '@/components/icons/doge';
 import { SwapIcon } from '@/components/icons/swap-icon';
 import { Refresh } from '@/components/icons/refresh';
 import Button from '@/components/ui/button';
@@ -69,7 +70,7 @@ export default function ComparisonChart() {
   const { theme } = useTheme();
   const breakpoint = useBreakpoint();
   const [price, setPrice] = useState(6.2);
-  const [date, setDate] = useState(1624147200);
+  const [date, setDate] = useState(1697957200);
   const [status, setStatus] = useState('Month');
   const [chartData, setChartData] = useState(monthlyComparison);
   const [priceDiff, setPriceDiff] = useState(-1.107);
@@ -99,7 +100,7 @@ export default function ComparisonChart() {
     <div className="rounded-lg bg-white p-6 shadow-card dark:bg-light-dark sm:p-8">
       <div className="flex flex-col-reverse justify-between gap-8 md:items-start lg:flex-row lg:items-center lg:gap-4">
         <div>
-          <div className="text-sm uppercase tracking-wider text-gray-600 dark:text-gray-400 sm:text-base">
+          <div className="text-sm uppercase tracking-wider sm:text-base">
             <span className="flex items-center gap-2.5">
               <span
                 className={cn(
@@ -108,7 +109,7 @@ export default function ComparisonChart() {
                 )}
               >
                 <Bitcoin className="h-auto w-7 lg:w-9" />
-                <EthereumDark className="h-auto w-7 lg:w-9" />
+                <Doge className="h-auto w-7 lg:w-9" />
               </span>
               <span
                 className={cn(
@@ -116,7 +117,7 @@ export default function ComparisonChart() {
                   toggleCoin ? 'flex-row-reverse' : 'flex-row'
                 )}
               >
-                <span>BTCB</span>/<span>ETH</span>
+                <span>PYT</span>/<span>THB</span>
               </span>
               <Button
                 size="mini"
@@ -138,7 +139,7 @@ export default function ComparisonChart() {
                 toggleCoin ? 'flex-row-reverse' : 'flex-row'
               )}
             >
-              <span>BTCB</span>/<span>ETH</span>
+              <span>PYT</span>/<span>THB</span>
             </span>
 
             <span

@@ -81,7 +81,7 @@ const COLUMNS = [
         <strong className="mb-0.5 flex justify-end text-base md:mb-1.5 md:text-lg lg:text-base 3xl:text-2xl">
           {value.balance}
           <span className="inline-block ltr:ml-1.5 rtl:mr-1.5 md:ltr:ml-2 md:rtl:mr-2">
-            BTC
+            THB
           </span>
         </strong>
         <span className="text-gray-600 dark:text-gray-400">
