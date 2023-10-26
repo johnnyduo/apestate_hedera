@@ -31,42 +31,8 @@ export const menuItems = [
     href: routes.liquidity,
   },
   {
-    name: 'Explore NFTs',
+    name: 'Explore Lands',
     icon: <CompassIcon />,
     href: routes.search,
-  },
-  {
-    name: 'Create NFT',
-    icon: <PlusCircle />,
-    href: routes.createNft,
-  },
-  {
-    name: 'NFT Details',
-    icon: <DiskIcon />,
-    href: routes.nftDetails,
-  },
-  {
-    name: 'Profile',
-    icon: <ProfileIcon />,
-    href: routes.profile,
-  },
-  {
-    name: 'Vote',
-    icon: <VoteIcon />,
-    href: routes.vote,
-    dropdownItems: [
-      {
-        name: 'Explore',
-        href: routes.vote,
-      },
-      {
-        name: 'Vote with pools',
-        href: routes.proposals,
-      },
-      {
-        name: 'Create proposal',
-        href: routes.createProposal,
-      },
-    ],
   },
 ];

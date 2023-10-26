@@ -42,7 +42,7 @@ function HeaderRightArea() {
             <SearchButton variant="transparent" className="dark:text-white" />
           </div>
         )}
-        <NotificationButton />
+        {/* <NotificationButton /> */}
         <WalletConnect />
       </div>
 
