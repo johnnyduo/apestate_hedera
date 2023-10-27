@@ -7,7 +7,7 @@ export const TransactionData = [
     status: 'Pending',
     address: '0898hshiw36...',
     amount: {
-      balance: '0.2231345',
+      balance: '5.231345',
       usdBalance: '11,032.24',
     },
   },
@@ -19,7 +19,7 @@ export const TransactionData = [
     status: 'Pending',
     address: '0898hshiw36...',
     amount: {
-      balance: '0.231345',
+      balance: '5.231345',
       usdBalance: '1,032.24',
     },
   },
@@ -31,7 +31,7 @@ export const TransactionData = [
     status: 'Pending',
     address: '0898hshiw36...',
     amount: {
-      balance: '0.3231345',
+      balance: '7.68825',
       usdBalance: '21,032.24',
     },
   },
@@ -43,7 +43,7 @@ export const TransactionData = [
     status: 'Pending',
     address: '0898hshiw36...',
     amount: {
-      balance: '0.531345',
+      balance: '1.531345',
       usdBalance: '1,232.24',
     },
   },
@@ -55,7 +55,7 @@ export const TransactionData = [
     status: 'Pending',
     address: '0898hshiw36...',
     amount: {
-      balance: '0.1931345',
+      balance: '3.1931345',
       usdBalance: '9,032.24',
     },
   },

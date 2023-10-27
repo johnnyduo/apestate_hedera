@@ -24,10 +24,6 @@ const tradeMenu = [
     name: 'Liquidity',
     value: routes.liquidity,
   },
-  {
-    name: 'Vote',
-    value: routes.vote,
-  },
 ];
 
 function ActiveNavLink({ href, title, isActive, className }: any) {
@@ -104,7 +100,7 @@ export default function Trade({ children }: React.PropsWithChildren<{}>) {
               />
             ))}
             <AnchorLink
-              href="/"
+              href="#"
               className="inline-flex items-center gap-1.5 py-1.5 px-3"
             >
               Charts

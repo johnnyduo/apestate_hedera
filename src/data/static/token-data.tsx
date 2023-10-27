@@ -59,12 +59,12 @@ export const TopPoolsData = [
   },
   {
     from: 'TLR',
-    to: 'THB',
+    to: 'USDC',
     volume: '356.4M',
   },
   {
     from: 'LPO',
-    to: 'STN',
+    to: 'USDC',
     volume: '295.6M',
   },
   {
@@ -74,12 +74,12 @@ export const TopPoolsData = [
   },
   {
     from: 'BKP',
-    to: 'THB',
+    to: 'USDC',
     volume: '590.2M',
   },
   {
     from: 'PYT',
-    to: 'LPO',
+    to: 'USDC',
     volume: '104.6M',
   },
 ];

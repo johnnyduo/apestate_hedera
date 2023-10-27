@@ -12,6 +12,7 @@ import {
 import { Bitcoin } from '@/components/icons/bitcoin';
 import { EthereumDark } from '@/components/icons/ethereum-dark';
 import { Doge } from '@/components/icons/doge';
+import { Usdc } from '@/components/icons/usdc';
 import { SwapIcon } from '@/components/icons/swap-icon';
 import { Refresh } from '@/components/icons/refresh';
 import Button from '@/components/ui/button';
@@ -109,7 +110,7 @@ export default function ComparisonChart() {
                 )}
               >
                 <Bitcoin className="h-auto w-7 lg:w-9" />
-                <Doge className="h-auto w-7 lg:w-9" />
+                <Usdc className="h-auto w-7 lg:w-9" />
               </span>
               <span
                 className={cn(
@@ -117,7 +118,7 @@ export default function ComparisonChart() {
                   toggleCoin ? 'flex-row-reverse' : 'flex-row'
                 )}
               >
-                <span>PYT</span>/<span>THB</span>
+                <span>PYT</span>/<span>USDC</span>
               </span>
               <Button
                 size="mini"
@@ -139,7 +140,7 @@ export default function ComparisonChart() {
                 toggleCoin ? 'flex-row-reverse' : 'flex-row'
               )}
             >
-              <span>PYT</span>/<span>THB</span>
+              <span>PYT</span>/<span>USDC</span>
             </span>
 
             <span
