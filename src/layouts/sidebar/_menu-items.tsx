@@ -16,23 +16,13 @@ export const menuItems = [
     href: routes.home,
   },
   {
-    name: 'Farm',
-    icon: <FarmIcon />,
-    href: routes.farms,
-  },
-  {
-    name: 'Swap',
+    name: 'Buy / Long',
     icon: <ExchangeIcon />,
     href: routes.swap,
   },
   {
-    name: 'Liquidity',
+    name: 'Borrow / Short',
     icon: <PoolIcon />,
     href: routes.liquidity,
-  },
-  {
-    name: 'Explore Lands',
-    icon: <CompassIcon />,
-    href: routes.search,
   },
 ];
