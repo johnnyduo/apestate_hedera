@@ -21,6 +21,7 @@
     "date-fns": "^2.29.3",
     "dayjs": "^1.11.5",
     "ethers": "^5.7.1",
+    "ethers-multicall-provider": "3.1.2",
     "framer-motion": "^7.3.6",
     "jotai": "^1.8.4",
     "js-cookie": "^3.0.1",
