@@ -16,7 +16,7 @@ export const menuItems = [
     href: routes.home,
   },
   {
-    name: 'Buy / Long',
+    name: 'Buy / Sell',
     icon: <ExchangeIcon />,
     href: routes.swap,
   },

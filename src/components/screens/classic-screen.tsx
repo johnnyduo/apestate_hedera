@@ -40,7 +40,7 @@ export default function ClassicScreen() {
                 My Balance
               </h3>
               <div className="mb-7 text-center font-medium tracking-tighter text-gray-900 dark:text-white xl:text-2xl 3xl:mb-8 3xl:text-[32px]">
-                $10,86,000
+                $1,086,000
               </div>
 
               <TopupButton className="md:h-12 " />
