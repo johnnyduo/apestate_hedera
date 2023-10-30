@@ -12,7 +12,7 @@ import useContractData from '@/lib/hooks/use-contract-data';
 import { ethers } from 'ethers';
 import { THBUSD } from '@/lib/contract';
 
-const EXCHANGE_FEE = 30;
+const EXCHANGE_FEE = 30 / 10000;
 
 const SwapPage: NextPageWithLayout = () => {
   let [toggleCoin, setToggleCoin] = useState(false);
@@ -39,23 +39,35 @@ const SwapPage: NextPageWithLayout = () => {
     return parsedPrice;
   }, [contractData, tokenSymbol, setPrice]);
 
-  const onUSDChange = useCallback(() => {
-    const price = fetchPrice();
-    console.log(price);
-  }, [usdValue, fetchPrice, setTokenValue]);
+  const onUSDChange = useCallback(
+    (usdValue: number) => {
+      const price = fetchPrice();
+      console.log(price);
 
-  const onTokenChange = useCallback(() => {
-    const price = fetchPrice();
-    console.log(price);
-  }, [tokenValue, fetchPrice, setUsdValue]);
+      let newTokenValue = usdValue / price;
+
+      if (toggleCoin) {
+        newTokenValue /= 1 - EXCHANGE_FEE;
+      } else {
+        newTokenValue -= newTokenValue * EXCHANGE_FEE;
+      }
+
+      setTokenValue(parseFloat(newTokenValue.toFixed(2)));
+    },
+    [fetchPrice, setTokenValue]
+  );
+
+  const onTokenChange = useCallback(
+    (tokenValue: number) => {
+      const price = fetchPrice();
+      console.log(price);
+    },
+    [fetchPrice, setUsdValue]
+  );
 
   useEffect(() => {
-    onUSDChange();
-  }, [usdValue]);
-
-  useEffect(() => {
-    onTokenChange();
-  }, [tokenValue, tokenSymbol]);
+    onTokenChange(tokenValue);
+  }, [tokenSymbol]);
 
   return (
     <>
@@ -76,8 +88,12 @@ const SwapPage: NextPageWithLayout = () => {
               exchangeRate={1.0}
               defaultCoinIndex={0}
               isUSD={true}
+              value={usdValue}
               getCoinValue={(data) => {
                 setUsdValue(parseFloat(data.value || '0'));
+                if (data.value) {
+                  onUSDChange(parseFloat(data.value || '0'));
+                }
               }}
             />
             <div className="absolute top-1/2 left-1/2 z-[1] -mt-4 -ml-4 rounded-full bg-white shadow-large dark:bg-gray-600">
@@ -95,9 +111,14 @@ const SwapPage: NextPageWithLayout = () => {
               label={toggleCoin ? 'From' : 'To'}
               exchangeRate={price}
               defaultCoinIndex={0}
+              value={tokenValue}
               getCoinValue={(data) => {
                 setTokenValue(parseFloat(data.value || '0'));
                 setTokenSymbol(data.coin);
+
+                if (data.value) {
+                  onTokenChange(parseFloat(data.value || '0'));
+                }
               }}
             />
           </div>

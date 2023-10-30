@@ -60,6 +60,9 @@ export default function CoinInput({
     let param = { coin: selectedCoin.code, value };
     getCoinValue && getCoinValue(param);
   }, []);
+  useEffect(() => {
+    setValue(rest.value?.toString() || '');
+  }, [rest.value]);
   return (
     <>
       <div
