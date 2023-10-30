@@ -1,10 +1,18 @@
 import { ethers } from 'ethers';
 import { MulticallWrapper } from 'ethers-multicall-provider';
-import React from 'react';
+import React, {
+  ReactNode,
+  useCallback,
+  useContext,
+  useEffect,
+  useState,
+} from 'react';
 
 import FakeUSDCABI from './abis/FakeUSDC.json';
 import OracleABI from './abis/LandPriceOracle.json';
 import ExchangeABI from './abis/LandPriceExchange.json';
+import { WalletContext } from './hooks/use-connect';
+import { useInterval } from 'usehooks-ts';
 
 export interface ContractData {
   landId: number;
@@ -104,5 +112,30 @@ export async function fetchContractData(address: string) {
     });
   }
 
+  console.log(result);
+
   return result;
+}
+
+export function ContractDataProvider({ children }: { children: ReactNode }) {
+  const [contractData, setContractData] = useState<ContractData[]>([]);
+  const { address } = useContext(WalletContext);
+
+  const refreshContractData = useCallback(async () => {
+    if (address) {
+      setContractData(await fetchContractData(address));
+    }
+  }, [setContractData, address]);
+
+  useEffect(() => {
+    refreshContractData();
+  }, [address]);
+
+  useInterval(() => refreshContractData(), 3000);
+
+  return (
+    <ContractDataContext.Provider value={contractData}>
+      {children}
+    </ContractDataContext.Provider>
+  );
 }

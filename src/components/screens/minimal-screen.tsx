@@ -12,6 +12,8 @@ import { priceFeedData } from '@/data/static/price-feed';
 import { useBreakpoint } from '@/lib/hooks/use-breakpoint';
 //images
 import AuthorImage from '@/assets/images/author.jpg';
+import useContractData from '@/lib/hooks/use-contract-data';
+import { ethers } from 'ethers';
 
 const topPoolsLimit = (breakpoint: string) => {
   switch (breakpoint) {
@@ -26,10 +28,29 @@ const topPoolsLimit = (breakpoint: string) => {
 
 export default function MinimalScreen() {
   const [limit, setLimit] = useState(4);
+  const [priceFeeds, setPriceFeeds] = useState<any[]>(priceFeedData);
   const breakpoint = useBreakpoint();
+  const contractData = useContractData();
   useEffect(() => {
     setLimit(topPoolsLimit(breakpoint));
   }, [breakpoint]);
+
+  useEffect(() => {
+    if (contractData.length == 4) {
+      const newPriceFeed = { ...priceFeeds };
+
+      for (let i = 0; i < 4; i++) {
+        newPriceFeed[i].balance = parseFloat(
+          ethers.utils.formatEther(contractData[i].balance)
+        ).toFixed(4);
+        newPriceFeed[i].usdBalance = parseFloat(
+          ethers.utils.formatEther(contractData[i].price)
+        ).toFixed(2);
+        newPriceFeed[i].lastUpdatedAt = contractData[i].lastUpdatedAt;
+      }
+    }
+  }, [contractData]);
+
   return (
     <>
       <NextSeo title="Real Apestate" description="Real Apestate" />

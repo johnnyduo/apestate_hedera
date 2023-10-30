@@ -16,6 +16,11 @@ export const menuItems = [
     href: routes.home,
   },
   {
+    name: 'Explore',
+    icon: <CompassIcon />,
+    href: routes.search,
+  },
+  {
     name: 'Buy / Sell',
     icon: <ExchangeIcon />,
     href: routes.swap,

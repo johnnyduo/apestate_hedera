@@ -14,6 +14,7 @@ import 'swiper/css';
 import '@/assets/css/scrollbar.css';
 import '@/assets/css/globals.css';
 import '@/assets/css/range-slider.css';
+import { ContractDataProvider } from '@/lib/contract';
 
 type AppPropsWithLayout = AppProps & {
   Component: NextPageWithLayout;
@@ -45,13 +46,15 @@ function CustomApp({ Component, pageProps }: AppPropsWithLayout) {
         defaultTheme="dark" //dark
       >
         <WalletProvider>
-          {/* <div className={`${firaCode.variable} font-body`}> */}
-          {getLayout(<Component {...pageProps} />)}
-          {/* <SettingsButton /> */}
-          <SettingsDrawer />
-          <ModalsContainer />
-          <DrawersContainer />
-          {/* </div> */}
+          <ContractDataProvider>
+            {/* <div className={`${firaCode.variable} font-body`}> */}
+            {getLayout(<Component {...pageProps} />)}
+            {/* <SettingsButton /> */}
+            <SettingsDrawer />
+            <ModalsContainer />
+            <DrawersContainer />
+            {/* </div> */}
+          </ContractDataProvider>
         </WalletProvider>
       </ThemeProvider>
     </>
