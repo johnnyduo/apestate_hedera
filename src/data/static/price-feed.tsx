@@ -9,14 +9,14 @@ import { Bnb } from '@/components/icons/bnb';
 import { Cardano } from '@/components/icons/cardano';
 import { Border } from '@/components/icons/border';
 
-///minimal 
+///minimal
 export const priceFeedData = [
   {
     id: '0',
     name: 'PhayaThai',
     symbol: 'PYT',
-    balance: '50.2145',
-    usdBalance: '11,032.24', //price per square meter
+    balance: '0',
+    usdBalance: '0', //price per square meter
     logo: BitcoinImage,
     change: '+12.5%',
     isChangePositive: true,
@@ -33,13 +33,14 @@ export const priceFeedData = [
       { name: 8, value: 18577.4 },
       { name: 9, value: 28577.4 },
     ],
+    lastUpdatedAt: 0,
   },
   {
     id: '1',
     name: 'Thonglor',
     symbol: 'TLR',
-    balance: '10.8845',
-    usdBalance: '1,032.24',
+    balance: '0',
+    usdBalance: '0',
     logo: TetherImage,
     change: '-1.5%',
     isChangePositive: false,
@@ -56,13 +57,14 @@ export const priceFeedData = [
       { name: 8, value: 36577.4 },
       { name: 9, value: 28577.4 },
     ],
+    lastUpdatedAt: 0,
   },
   {
     id: '2',
     name: 'LatPhrao',
     symbol: 'LPO',
-    balance: '100.2370',
-    usdBalance: '532.94',
+    balance: '0',
+    usdBalance: '0',
     logo: CardanoImage,
     change: '+12.5%',
     isChangePositive: true,
@@ -79,13 +81,14 @@ export const priceFeedData = [
       { name: 8, value: 18577.4 },
       { name: 9, value: 28577.4 },
     ],
+    lastUpdatedAt: 0,
   },
   {
     id: '3',
     name: 'Sathon',
     symbol: 'STN',
-    balance: '40.55',
-    usdBalance: '340.24',
+    balance: '0',
+    usdBalance: '0',
     logo: BinanceImage,
     change: '+1.5%',
     isChangePositive: true,
@@ -102,5 +105,6 @@ export const priceFeedData = [
       { name: 8, value: 33577.4 },
       { name: 9, value: 39577.4 },
     ],
+    lastUpdatedAt: 0,
   },
 ];

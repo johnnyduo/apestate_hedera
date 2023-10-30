@@ -37,7 +37,7 @@ export default function MinimalScreen() {
 
   useEffect(() => {
     if (contractData.length == 4) {
-      const newPriceFeed = { ...priceFeeds };
+      const newPriceFeed: any = [...priceFeedData];
 
       for (let i = 0; i < 4; i++) {
         newPriceFeed[i].balance = parseFloat(
@@ -48,6 +48,8 @@ export default function MinimalScreen() {
         ).toFixed(2);
         newPriceFeed[i].lastUpdatedAt = contractData[i].lastUpdatedAt;
       }
+
+      setPriceFeeds(newPriceFeed);
     }
   }, [contractData]);
 
@@ -57,7 +59,7 @@ export default function MinimalScreen() {
       <div className="">
         <PriceFeedSlider
           limit={4}
-          priceFeeds={priceFeedData}
+          priceFeeds={priceFeeds}
           gridClassName="grid-cols-1 gap-6 2xl:grid-cols-4"
         />
         <div className="mt-6 grid grid-cols-1 items-start gap-6 md:grid-cols-2 lg:grid-cols-12">

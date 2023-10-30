@@ -22,6 +22,7 @@ type LivePriceFeedProps = {
   isChangePositive: boolean;
   isBorder?: boolean;
   prices: Price[];
+  lastUpdatedAt: number;
 };
 
 export function LivePriceFeed({
@@ -35,6 +36,7 @@ export function LivePriceFeed({
   isChangePositive,
   prices,
   isBorder,
+  lastUpdatedAt,
 }: LivePriceFeedProps) {
   return (
     <div
@@ -61,8 +63,9 @@ export function LivePriceFeed({
 
         <div className="flex items-center text-xs font-medium 2xl:text-sm">
           <span
-            className="truncate tracking-tighter text-gray-600 ltr:mr-5 rtl:ml-5 dark:text-gray-400 2xl:w-24 3xl:w-auto" style={{width:"auto"}}
-            title={`${usdBalance} USD`} 
+            className="truncate tracking-tighter text-gray-600 ltr:mr-5 rtl:ml-5 dark:text-gray-400 2xl:w-24 3xl:w-auto"
+            style={{ width: 'auto' }}
+            title={`${usdBalance} USD`}
           >
             {usdBalance} USD/M<sup>2</sup>
           </span>
@@ -81,6 +84,10 @@ export function LivePriceFeed({
             </span>
             {change}
           </span>
+        </div>
+
+        <div className="mt-1 truncate text-sm tracking-tighter text-gray-600 ltr:mr-5 rtl:ml-5 dark:text-gray-400 2xl:w-24 3xl:w-auto">
+          Updated At: {new Date(lastUpdatedAt * 1000).toLocaleString()}
         </div>
       </div>
 
