@@ -92,7 +92,10 @@ export default function CoinInput({
             {...rest}
           />
           <span className="font-xs px-3 text-gray-400">
-            = ${exchangeRate ? (parseFloat(value) || 0) * exchangeRate : '0.00'}
+            = $
+            {exchangeRate
+              ? ((parseFloat(value) || 0) * exchangeRate).toFixed(2)
+              : '0.00'}
           </span>
         </div>
       </div>
