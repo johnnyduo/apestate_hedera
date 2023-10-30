@@ -1,19 +1,23 @@
 import type { CoinTypes } from '@/types';
 import { useState } from 'react';
-import { coinList } from '@/data/static/coin-list';
+import { coinList, usdCoinList } from '@/data/static/coin-list';
 import { SearchIcon } from '@/components/icons/search';
 import { useModal } from '@/components/modal-views/context';
 
 interface CoinSelectViewTypes {
+  isUSD?: boolean;
   onSelect: (selectedCoin: CoinTypes) => void;
 }
 
-export default function CoinSelectView({ onSelect }: CoinSelectViewTypes) {
+export default function CoinSelectView({
+  isUSD = false,
+  onSelect,
+}: CoinSelectViewTypes) {
   const { closeModal } = useModal();
   let [searchKeyword, setSearchKeyword] = useState('');
-  let coinListData = coinList;
+  let coinListData = isUSD ? usdCoinList : coinList;
   if (searchKeyword.length > 0) {
-    coinListData = coinList.filter(function (item) {
+    coinListData = coinListData.filter(function (item) {
       const name = item.name;
       return (
         name.match(searchKeyword) ||

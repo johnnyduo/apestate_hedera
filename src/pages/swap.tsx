@@ -27,8 +27,9 @@ const SwapPage: NextPageWithLayout = () => {
           >
             <CoinInput
               label={'From'}
-              exchangeRate={0.0}
+              exchangeRate={1.0}
               defaultCoinIndex={0}
+              isUSD={true}
               getCoinValue={(data) => console.log('From coin value:', data)}
             />
             <div className="absolute top-1/2 left-1/2 z-[1] -mt-4 -ml-4 rounded-full bg-white shadow-large dark:bg-gray-600">
@@ -45,18 +46,15 @@ const SwapPage: NextPageWithLayout = () => {
             <CoinInput
               label={'To'}
               exchangeRate={0.0}
-              defaultCoinIndex={1}
+              defaultCoinIndex={0}
               getCoinValue={(data) => console.log('To coin value:', data)}
             />
           </div>
         </div>
         <div className="flex flex-col gap-4 xs:gap-[18px]">
-          <TransactionInfo label={'Min. Received'} />
           <TransactionInfo label={'Rate'} />
-          <TransactionInfo label={'Offered by'} />
-          <TransactionInfo label={'Price Slippage'} value={'1%'} />
-          <TransactionInfo label={'Network Fee'} />
-          <TransactionInfo label={'Criptic Fee'} />
+          <TransactionInfo label={'Updated At'} />
+          <TransactionInfo label={'Exchange Fee'} />
         </div>
         <Button
           size="large"

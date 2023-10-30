@@ -112,7 +112,7 @@ export async function fetchContractData(address: string) {
     });
   }
 
-  console.log(result);
+  // console.log(result);
 
   return result;
 }

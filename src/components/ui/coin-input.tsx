@@ -1,12 +1,12 @@
 import type { CoinTypes } from '@/types';
-import { useState, useRef } from 'react';
+import { useState, useRef, useEffect } from 'react';
 import dynamic from 'next/dynamic';
 import { motion, AnimatePresence } from 'framer-motion';
 import cn from 'classnames';
 import { ChevronDown } from '@/components/icons/chevron-down';
 import { useClickAway } from '@/lib/hooks/use-click-away';
 import { useLockBodyScroll } from '@/lib/hooks/use-lock-body-scroll';
-import { coinList } from '@/data/static/coin-list';
+import { coinList, usdCoinList } from '@/data/static/coin-list';
 // dynamic import
 const CoinSelectView = dynamic(
   () => import('@/components/ui/coin-select-view')
@@ -17,6 +17,7 @@ interface CoinInputTypes extends React.InputHTMLAttributes<HTMLInputElement> {
   exchangeRate?: number;
   defaultCoinIndex?: number;
   className?: string;
+  isUSD?: boolean;
   getCoinValue: (param: { coin: string; value: string }) => void;
 }
 
@@ -28,10 +29,13 @@ export default function CoinInput({
   defaultCoinIndex = 0,
   exchangeRate,
   className,
+  isUSD = false,
   ...rest
 }: CoinInputTypes) {
   let [value, setValue] = useState('');
-  let [selectedCoin, setSelectedCoin] = useState(coinList[defaultCoinIndex]);
+  let [selectedCoin, setSelectedCoin] = useState(
+    isUSD ? usdCoinList[0] : coinList[defaultCoinIndex]
+  );
   let [visibleCoinList, setVisibleCoinList] = useState(false);
   const modalContainerRef = useRef<HTMLDivElement>(null);
   useClickAway(modalContainerRef, () => {
@@ -48,7 +52,14 @@ export default function CoinInput({
   function handleSelectedCoin(coin: CoinTypes) {
     setSelectedCoin(coin);
     setVisibleCoinList(false);
+
+    let param = { coin: coin.code, value };
+    getCoinValue && getCoinValue(param);
   }
+  useEffect(() => {
+    let param = { coin: selectedCoin.code, value };
+    getCoinValue && getCoinValue(param);
+  }, []);
   return (
     <>
       <div
@@ -62,12 +73,12 @@ export default function CoinInput({
             {label}
           </span>
           <button
-            onClick={() => setVisibleCoinList(true)}
+            onClick={() => setVisibleCoinList(!isUSD)}
             className="flex items-center font-medium outline-none dark:text-gray-100"
           >
             {selectedCoin?.icon}{' '}
             <span className="ltr:ml-2 rtl:mr-2">{selectedCoin?.code} </span>
-            <ChevronDown className="ltr:ml-1.5 rtl:mr-1.5" />
+            {!isUSD && <ChevronDown className="ltr:ml-1.5 rtl:mr-1.5" />}
           </button>
         </div>
         <div className="flex flex-1 flex-col text-right">
@@ -81,7 +92,7 @@ export default function CoinInput({
             {...rest}
           />
           <span className="font-xs px-3 text-gray-400">
-            = ${exchangeRate ? exchangeRate : '0.00'}
+            = ${exchangeRate ? (parseFloat(value) || 0) * exchangeRate : '0.00'}
           </span>
         </div>
       </div>

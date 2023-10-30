@@ -6,6 +6,15 @@ import { Usdc } from '@/components/icons/usdc';
 import { Cardano } from '@/components/icons/cardano';
 import { Doge } from '@/components/icons/doge';
 
+export const usdCoinList = [
+  {
+    icon: <Usdc />,
+    code: 'USDC',
+    name: 'USD Coin',
+    price: 1.001,
+  },
+];
+
 export const coinList = [
   {
     icon: <Bitcoin />,
