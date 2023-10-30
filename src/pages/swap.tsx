@@ -11,6 +11,7 @@ import RootLayout from '@/layouts/_root-layout';
 
 const SwapPage: NextPageWithLayout = () => {
   let [toggleCoin, setToggleCoin] = useState(false);
+
   return (
     <>
       <NextSeo
@@ -26,7 +27,7 @@ const SwapPage: NextPageWithLayout = () => {
             )}
           >
             <CoinInput
-              label={'From'}
+              label={toggleCoin ? 'To' : 'From'}
               exchangeRate={1.0}
               defaultCoinIndex={0}
               isUSD={true}
@@ -44,7 +45,7 @@ const SwapPage: NextPageWithLayout = () => {
               </Button>
             </div>
             <CoinInput
-              label={'To'}
+              label={toggleCoin ? 'From' : 'To'}
               exchangeRate={0.0}
               defaultCoinIndex={0}
               getCoinValue={(data) => console.log('To coin value:', data)}
@@ -54,7 +55,7 @@ const SwapPage: NextPageWithLayout = () => {
         <div className="flex flex-col gap-4 xs:gap-[18px]">
           <TransactionInfo label={'Rate'} />
           <TransactionInfo label={'Updated At'} />
-          <TransactionInfo label={'Exchange Fee'} />
+          <TransactionInfo label={'Exchange Fee'} value={'0.3%'} />
         </div>
         <Button
           size="large"
