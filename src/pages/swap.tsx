@@ -10,7 +10,7 @@ import Trade from '@/components/ui/trade';
 import RootLayout from '@/layouts/_root-layout';
 import useContractData from '@/lib/hooks/use-contract-data';
 import { ethers } from 'ethers';
-import { THBUSD } from '@/lib/contract';
+import { THBUSD, refreshOraclePrice } from '@/lib/contract';
 
 const EXCHANGE_FEE = 30 / 10000;
 
@@ -23,6 +23,7 @@ const SwapPage: NextPageWithLayout = () => {
   const [tokenValue, setTokenValue] = useState(0);
   const [tokenSymbol, setTokenSymbol] = useState('PYT');
 
+  const [landId, setLandId] = useState(0);
   const [price, setPrice] = useState(0);
   const [priceUpdatedAt, setPriceUpdatedAt] = useState(0);
 
@@ -33,6 +34,8 @@ const SwapPage: NextPageWithLayout = () => {
     const data = contractData.find((x) => x.symbol == tokenSymbol);
     const parsedPrice =
       parseFloat(ethers.utils.formatEther(data?.price || '0')) * THBUSD;
+
+    setLandId(data?.landId || 0);
     setPrice(parsedPrice);
     setPriceUpdatedAt(data?.lastUpdatedAt || 0);
 
@@ -68,6 +71,10 @@ const SwapPage: NextPageWithLayout = () => {
   useEffect(() => {
     onTokenChange(tokenValue);
   }, [tokenSymbol]);
+
+  useEffect(() => {
+    fetchPrice();
+  }, [contractData]);
 
   return (
     <>
@@ -135,14 +142,48 @@ const SwapPage: NextPageWithLayout = () => {
           />
           <TransactionInfo label={'Exchange Fee'} value={'0.3%'} />
         </div>
-        <Button
-          size="large"
-          shape="rounded"
-          fullWidth={true}
-          className="mt-6 uppercase xs:mt-8 xs:tracking-widest"
-        >
-          SWAP
-        </Button>
+
+        {priceUpdatedAt * 1000 < Date.now() - 3600 * 1000 ? (
+          <Button
+            size="large"
+            shape="rounded"
+            fullWidth={true}
+            disabled={executing}
+            className="mt-6 uppercase xs:mt-8 xs:tracking-widest"
+            onClick={async () => {
+              try {
+                setExecuting(true);
+                await refreshOraclePrice(landId);
+              } catch (err) {
+                console.error(err);
+              } finally {
+                setExecuting(false);
+              }
+            }}
+          >
+            UPDATE RATE
+          </Button>
+        ) : !approved && !toggleCoin ? (
+          <Button
+            size="large"
+            shape="rounded"
+            fullWidth={true}
+            disabled={executing}
+            className="mt-6 uppercase xs:mt-8 xs:tracking-widest"
+          >
+            APPROVE
+          </Button>
+        ) : (
+          <Button
+            size="large"
+            shape="rounded"
+            fullWidth={true}
+            disabled={executing}
+            className="mt-6 uppercase xs:mt-8 xs:tracking-widest"
+          >
+            {toggleCoin ? 'BUY' : 'SELL'}
+          </Button>
+        )}
       </Trade>
     </>
   );

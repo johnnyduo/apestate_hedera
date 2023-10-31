@@ -146,3 +146,52 @@ export function ContractDataProvider({ children }: { children: ReactNode }) {
     </ContractDataContext.Provider>
   );
 }
+
+function getSigner() {
+  const provider = new ethers.providers.Web3Provider(window.ethereum, 'any');
+  const signer = provider.getSigner();
+  console.log(signer);
+  return signer;
+}
+
+export async function fetchApproval(address: string) {
+  const approval = await FakeUSDC.allowance(address, Exchange.address);
+  return approval;
+}
+
+export async function usdcApprove(amount: string | number) {
+  await (
+    await FakeUSDC.approve(
+      Exchange.address,
+      ethers.utils.parseEther(amount.toString()),
+      { provider: getSigner() }
+    )
+  ).wait();
+}
+
+export async function refreshOraclePrice(landId: number) {
+  await (
+    await Oracle.requestVolumeData(landId, { provider: getSigner() })
+  ).wait();
+}
+
+export async function executeBuy(landId: number, usdAmount: string | number) {
+  await (
+    await Exchange.buy(landId, ethers.utils.parseEther(usdAmount.toString()), {
+      provider: getSigner(),
+    })
+  ).wait();
+}
+
+export async function executeSell(
+  landId: number,
+  shareAmount: string | number
+) {
+  await (
+    await Exchange.sell(
+      landId,
+      ethers.utils.parseEther(shareAmount.toString()),
+      { provider: getSigner() }
+    )
+  ).wait();
+}
