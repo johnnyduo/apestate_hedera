@@ -19,7 +19,7 @@ import {
   usdcApprove,
 } from '@/lib/contract';
 
-const EXCHANGE_FEE = 30 / 10000;
+const EXCHANGE_FEE = 30.1 / 10000;
 
 const SwapPage: NextPageWithLayout = () => {
   let [toggleCoin, setToggleCoin] = useState(false);
@@ -82,6 +82,17 @@ const SwapPage: NextPageWithLayout = () => {
     (tokenValue: number) => {
       const price = fetchPrice();
       console.log(price);
+
+      let newUsdValue = tokenValue * price;
+
+      if (toggleCoin) {
+        newUsdValue -= newUsdValue * EXCHANGE_FEE;
+      } else {
+        newUsdValue /= 1 - EXCHANGE_FEE;
+      }
+
+      setUsdValue(parseFloat(newUsdValue.toFixed(4)));
+      setApproved(false);
     },
     [fetchPrice, setUsdValue]
   );
@@ -96,10 +107,7 @@ const SwapPage: NextPageWithLayout = () => {
 
   return (
     <>
-      <NextSeo
-        title="Farms"
-        description="Apestate"
-      />
+      <NextSeo title="Farms" description="Apestate" />
       <Trade>
         <div className="mb-5 border-b border-dashed border-gray-200 pb-5 dark:border-gray-800 xs:mb-7 xs:pb-6">
           <div
@@ -149,7 +157,10 @@ const SwapPage: NextPageWithLayout = () => {
           </div>
         </div>
         <div className="flex flex-col gap-4 xs:gap-[18px]">
-          <TransactionInfo label={'Rate'} value={`${price.toFixed(2)} USD/m²`} />
+          <TransactionInfo
+            label={'Rate'}
+            value={`${price.toFixed(2)} USD/m²`}
+          />
           <TransactionInfo
             label={'Updated At'}
             value={
