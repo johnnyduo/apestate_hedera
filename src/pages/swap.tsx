@@ -98,7 +98,7 @@ const SwapPage: NextPageWithLayout = () => {
     <>
       <NextSeo
         title="Farms"
-        description="Criptic - React Next Web3 NFT Crypto Dashboard Template"
+        description="Apestate"
       />
       <Trade>
         <div className="mb-5 border-b border-dashed border-gray-200 pb-5 dark:border-gray-800 xs:mb-7 xs:pb-6">
@@ -149,7 +149,7 @@ const SwapPage: NextPageWithLayout = () => {
           </div>
         </div>
         <div className="flex flex-col gap-4 xs:gap-[18px]">
-          <TransactionInfo label={'Rate'} value={`${price.toFixed(2)} $/m^2`} />
+          <TransactionInfo label={'Rate'} value={`${price.toFixed(2)} USD/m²`} />
           <TransactionInfo
             label={'Updated At'}
             value={
@@ -158,7 +158,7 @@ const SwapPage: NextPageWithLayout = () => {
                 : undefined
             }
           />
-          <TransactionInfo label={'Exchange Fee'} value={'0.3%'} />
+          <TransactionInfo label={'Exchange Fee'} value={'0.25%'} />
         </div>
 
         {priceUpdatedAt * 1000 < Date.now() - 3600 * 1000 ? (

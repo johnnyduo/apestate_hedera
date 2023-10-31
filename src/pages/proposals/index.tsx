@@ -85,7 +85,7 @@ const ProposalsPage: NextPageWithLayout = () => {
     <>
       <NextSeo
         title="Proposal"
-        description="Criptic - React Next Web3 NFT Crypto Dashboard Template"
+        description="Apestate"
       />
       <section className="mx-auto w-full max-w-[1160px] text-sm ">
         <header
@@ -108,7 +108,7 @@ const ProposalsPage: NextPageWithLayout = () => {
                 You have 100 votes
               </h2>
               <p className="leading-relaxed text-gray-600 dark:text-gray-400">
-                You need CRIPTIC or CRIPTIC tokens to participate in governance.
+                You need Apestate or Apestate tokens to participate in governance.
               </p>
             </div>
           </div>
