@@ -8,6 +8,7 @@ import { ChevronForward } from '@/components/icons/chevron-forward';
 import { PowerIcon } from '@/components/icons/power';
 import { useModal } from '@/components/modal-views/context';
 import { useContext } from 'react';
+import { usdcFaucet } from '@/lib/contract';
 
 export default function WalletConnect({
   btnClassName,
@@ -83,13 +84,14 @@ export default function WalletConnect({
             </Menu>
           </div>
 
-          <ActiveLink href="/create-nft" className={cn(anchorClassName)}>
-            <Button
-              className={cn('shadow-main hover:shadow-large', btnClassName)}
-            >
-              CREATE
-            </Button>
-          </ActiveLink>
+          {/* <ActiveLink href="/create-nft" className={cn(anchorClassName)}> */}
+          <Button
+            className={cn('shadow-main hover:shadow-large', btnClassName)}
+            onClick={() => usdcFaucet('1000000')}
+          >
+            FAUCET
+          </Button>
+          {/* </ActiveLink> */}
         </div>
       ) : (
         <Button

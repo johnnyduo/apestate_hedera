@@ -10,7 +10,14 @@ import Trade from '@/components/ui/trade';
 import RootLayout from '@/layouts/_root-layout';
 import useContractData from '@/lib/hooks/use-contract-data';
 import { ethers } from 'ethers';
-import { THBUSD, refreshOraclePrice } from '@/lib/contract';
+import {
+  THBUSD,
+  executeBuy,
+  executeSell,
+  fetchUsdcBalance,
+  refreshOraclePrice,
+  usdcApprove,
+} from '@/lib/contract';
 
 const EXCHANGE_FEE = 30 / 10000;
 
@@ -20,8 +27,10 @@ const SwapPage: NextPageWithLayout = () => {
   const contractData = useContractData();
 
   const [usdValue, setUsdValue] = useState(0);
+  const [usdBalance, setUsdBalance] = useState(0);
   const [tokenValue, setTokenValue] = useState(0);
   const [tokenSymbol, setTokenSymbol] = useState('PYT');
+  const [tokenBalance, setTokenBalance] = useState(0);
 
   const [landId, setLandId] = useState(0);
   const [price, setPrice] = useState(0);
@@ -29,6 +38,11 @@ const SwapPage: NextPageWithLayout = () => {
 
   const [approved, setApproved] = useState(false);
   const [executing, setExecuting] = useState(false);
+
+  const refreshUsdcBalance = useCallback(async () => {
+    const usdBalanceRaw = await fetchUsdcBalance();
+    setUsdBalance(parseFloat(ethers.utils.formatEther(usdBalanceRaw || '0')));
+  }, [setUsdBalance]);
 
   const fetchPrice = useCallback(() => {
     const data = contractData.find((x) => x.symbol == tokenSymbol);
@@ -38,6 +52,9 @@ const SwapPage: NextPageWithLayout = () => {
     setLandId(data?.landId || 0);
     setPrice(parsedPrice);
     setPriceUpdatedAt(data?.lastUpdatedAt || 0);
+    setTokenBalance(parseFloat(ethers.utils.formatEther(data?.balance || '0')));
+
+    refreshUsdcBalance().catch((err) => console.error(err));
 
     return parsedPrice;
   }, [contractData, tokenSymbol, setPrice]);
@@ -55,7 +72,8 @@ const SwapPage: NextPageWithLayout = () => {
         newTokenValue -= newTokenValue * EXCHANGE_FEE;
       }
 
-      setTokenValue(parseFloat(newTokenValue.toFixed(2)));
+      setTokenValue(parseFloat(newTokenValue.toFixed(4)));
+      setApproved(false);
     },
     [fetchPrice, setTokenValue]
   );
@@ -92,7 +110,7 @@ const SwapPage: NextPageWithLayout = () => {
           >
             <CoinInput
               label={toggleCoin ? 'To' : 'From'}
-              exchangeRate={1.0}
+              balance={usdBalance.toFixed(2)}
               defaultCoinIndex={0}
               isUSD={true}
               value={usdValue}
@@ -116,7 +134,7 @@ const SwapPage: NextPageWithLayout = () => {
             </div>
             <CoinInput
               label={toggleCoin ? 'From' : 'To'}
-              exchangeRate={price}
+              balance={tokenBalance.toFixed(4)}
               defaultCoinIndex={0}
               value={tokenValue}
               getCoinValue={(data) => {
@@ -170,6 +188,17 @@ const SwapPage: NextPageWithLayout = () => {
             fullWidth={true}
             disabled={executing}
             className="mt-6 uppercase xs:mt-8 xs:tracking-widest"
+            onClick={async () => {
+              try {
+                setExecuting(true);
+                await usdcApprove(usdValue);
+                setApproved(true);
+              } catch (err) {
+                console.error(err);
+              } finally {
+                setExecuting(false);
+              }
+            }}
           >
             APPROVE
           </Button>
@@ -180,8 +209,27 @@ const SwapPage: NextPageWithLayout = () => {
             fullWidth={true}
             disabled={executing}
             className="mt-6 uppercase xs:mt-8 xs:tracking-widest"
+            onClick={async () => {
+              try {
+                setExecuting(true);
+
+                if (toggleCoin) {
+                  await executeSell(landId, tokenValue);
+                } else {
+                  await executeBuy(landId, usdValue);
+                }
+
+                setUsdValue(0);
+                setTokenValue(0);
+                fetchPrice();
+              } catch (err) {
+                console.error(err);
+              } finally {
+                setExecuting(false);
+              }
+            }}
           >
-            {toggleCoin ? 'BUY' : 'SELL'}
+            {toggleCoin ? 'SELL' : 'BUY'}
           </Button>
         )}
       </Trade>

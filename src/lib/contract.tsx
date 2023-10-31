@@ -154,9 +154,38 @@ function getSigner() {
   return signer;
 }
 
-export async function fetchApproval(address: string) {
-  const approval = await FakeUSDC.allowance(address, Exchange.address);
+export async function fetchApproval(address?: string) {
+  const signer = getSigner();
+  const approval = await FakeUSDC.allowance(
+    address ?? (await signer.getAddress()),
+    Exchange.address
+  );
   return approval;
+}
+
+export async function fetchUsdcBalance(address?: string) {
+  const signer = getSigner();
+  const balance = await FakeUSDC.balanceOf(
+    address ?? (await signer.getAddress())
+  );
+  return balance;
+}
+
+export async function usdcFaucet(amount: string | number) {
+  const signer = getSigner();
+
+  const FakeUSDC = new ethers.Contract(
+    process.env.NEXT_PUBLIC_USDC_CONTRACT!,
+    FakeUSDCABI,
+    signer
+  );
+
+  await (
+    await FakeUSDC.mint(
+      await signer.getAddress(),
+      ethers.utils.parseEther(amount.toString())
+    )
+  ).wait();
 }
 
 export async function usdcApprove(amount: string | number) {
@@ -192,9 +221,7 @@ export async function executeBuy(landId: number, usdAmount: string | number) {
   );
 
   await (
-    await Exchange.buy(landId, ethers.utils.parseEther(usdAmount.toString()), {
-      provider: getSigner(),
-    })
+    await Exchange.buy(landId, ethers.utils.parseEther(usdAmount.toString()))
   ).wait();
 }
 

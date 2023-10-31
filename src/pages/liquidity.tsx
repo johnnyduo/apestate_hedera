@@ -20,7 +20,7 @@ const LiquidityPage: NextPageWithLayout = () => {
           <div className="relative flex flex-col gap-3">
             <CoinInput
               label={'From'}
-              exchangeRate={0.0}
+              balance={0.0}
               defaultCoinIndex={0}
               getCoinValue={(data) => console.log('From coin value:', data)}
             />
@@ -36,7 +36,7 @@ const LiquidityPage: NextPageWithLayout = () => {
             </div>
             <CoinInput
               label={'To'}
-              exchangeRate={0.0}
+              balance={0.0}
               defaultCoinIndex={1}
               getCoinValue={(data) => console.log('To coin value:', data)}
             />

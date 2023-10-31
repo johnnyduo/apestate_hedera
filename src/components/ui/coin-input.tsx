@@ -14,7 +14,7 @@ const CoinSelectView = dynamic(
 
 interface CoinInputTypes extends React.InputHTMLAttributes<HTMLInputElement> {
   label: string;
-  exchangeRate?: number;
+  balance?: string | number;
   defaultCoinIndex?: number;
   className?: string;
   isUSD?: boolean;
@@ -27,7 +27,7 @@ export default function CoinInput({
   label,
   getCoinValue,
   defaultCoinIndex = 0,
-  exchangeRate,
+  balance,
   className,
   isUSD = false,
   ...rest
@@ -94,12 +94,7 @@ export default function CoinInput({
             className="w-full rounded-tr-lg rounded-br-lg border-0 pb-0.5 text-right text-lg outline-none focus:ring-0 dark:bg-light-dark"
             {...rest}
           />
-          <span className="font-xs px-3 text-gray-400">
-            = $
-            {exchangeRate
-              ? ((parseFloat(value) || 0) * exchangeRate).toFixed(2)
-              : '0.00'}
-          </span>
+          <span className="font-xs px-3 text-gray-400">Balance: {balance}</span>
         </div>
       </div>
 
