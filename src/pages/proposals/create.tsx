@@ -20,7 +20,7 @@ const actionOptions = [
     value: 'custom_contact',
   },
   {
-    name: 'CRIPTIC Token',
+    name: 'Apestate Token',
     value: 'criptic_token',
   },
   {
@@ -255,7 +255,7 @@ const CreateProposalPage: NextPageWithLayout = () => {
     <>
       <NextSeo
         title="Create Proposal"
-        description="Criptic - React Next Web3 NFT Crypto Dashboard Template"
+        description="Apestate"
       />
       <section className="mx-auto w-full max-w-[1160px] text-sm">
         <header className="mb-10 flex flex-col gap-4 rounded-lg bg-white p-5 py-6 shadow-card dark:bg-light-dark xs:p-6 sm:flex-row sm:items-center sm:justify-between">
@@ -269,7 +269,7 @@ const CreateProposalPage: NextPageWithLayout = () => {
               </h2>
               <p className="leading-[1.8] text-gray-600 dark:text-gray-400">
                 In order to submit a proposal you must have at least 10,000
-                CRIPTIC tokens <br className="hidden xl:inline-block" />{' '}
+                Apestate tokens <br className="hidden xl:inline-block" />{' '}
                 delegated to you{' '}
                 <a
                   target="_blank"
