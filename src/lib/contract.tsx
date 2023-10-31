@@ -85,10 +85,6 @@ export async function fetchContractData(address: string) {
   const promises = [];
 
   for (let landId = 1; landId <= 4; landId++) {
-    promises.push(Exchange.balanceOf(address, landId));
-  }
-
-  for (let landId = 1; landId <= 4; landId++) {
     promises.push(Oracle.price(landId));
   }
 
@@ -96,11 +92,22 @@ export async function fetchContractData(address: string) {
     promises.push(Oracle.latestFulfill(landId));
   }
 
+  if (address) {
+    for (let landId = 1; landId <= 4; landId++) {
+      promises.push(Exchange.balanceOf(address, landId));
+    }
+  } else {
+    promises.push(Promise.resolve('0'));
+    promises.push(Promise.resolve('0'));
+    promises.push(Promise.resolve('0'));
+    promises.push(Promise.resolve('0'));
+  }
+
   const response = await Promise.all(promises);
 
-  const balances = response.slice(0, 4);
-  const prices = response.slice(4, 8);
-  const updatedAts = response.slice(8, 12);
+  const prices = response.slice(0, 4);
+  const updatedAts = response.slice(4, 8);
+  const balances = response.slice(8, 12);
 
   const result: ContractData[] = [];
 
@@ -124,9 +131,7 @@ export function ContractDataProvider({ children }: { children: ReactNode }) {
   const { address } = useContext(WalletContext);
 
   const refreshContractData = useCallback(async () => {
-    if (address) {
-      setContractData(await fetchContractData(address));
-    }
+    setContractData(await fetchContractData(address));
   }, [setContractData, address]);
 
   useEffect(() => {
