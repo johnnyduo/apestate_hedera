@@ -4,7 +4,7 @@ import AnchorLink from '@/components/ui/links/anchor-link';
 import { useIsMounted } from '@/lib/hooks/use-is-mounted';
 import { useIsDarkMode } from '@/lib/hooks/use-is-dark-mode';
 import lightLogo from '@/assets/images/logo.svg';
-import darkLogo from '@/assets/images/logoape.png';
+import darkLogo from '@/assets/images/apelogo2-01.png';
 import routes from '@/config/routes';
 import { LAYOUT_OPTIONS } from '@/lib/constants';
 
