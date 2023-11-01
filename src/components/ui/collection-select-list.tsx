@@ -10,27 +10,27 @@ import CollectionImage4 from '@/assets/images/collection/collection-4.jpg';
 export const collectionList = [
   {
     icon: CollectionImage1,
-    name: 'Iron flower',
+    name: 'PhayaThai',
     value: 'iron-flower',
   },
   {
     icon: CollectionImage2,
-    name: 'Creative web',
+    name: 'Thonglor',
     value: 'creative-web',
   },
   {
     icon: CollectionImage3,
-    name: 'Art in binary',
+    name: 'LatPhrao',
     value: 'art-in-binary',
   },
   {
     icon: CollectionImage4,
-    name: 'Sound of wave',
+    name: 'Bangkapi',
     value: 'sound-of-wave',
   },
   {
     icon: CollectionImage2,
-    name: 'Pixel art',
+    name: 'Sathon',
     value: 'pixel-art',
   },
 ];

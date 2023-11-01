@@ -5,6 +5,7 @@ import { Tab, TabPanels, TabPanel } from '@/components/ui/tab';
 import { ChevronDown } from '@/components/icons/chevron-down';
 import { coinList } from '@/data/static/coin-list';
 import Button from '@/components/ui/button';
+import { Usdc } from '@/components/icons/usdc';
 import { IconUSFlag } from '@/components/icons/icon-us-flag';
 import { useIsMounted } from '@/lib/hooks/use-is-mounted';
 import { useBreakpoint } from '@/lib/hooks/use-breakpoint';
@@ -126,7 +127,7 @@ function CoinTransaction({ transactionType }: CoinTransactionProps) {
       </div>
       <div className="relative mt-4 flex h-11 w-full items-center justify-between rounded-lg border border-gray-100 bg-body px-4 pl-3 text-sm text-gray-900 dark:border-gray-700 dark:bg-light-dark dark:text-white sm:h-13 sm:pl-4">
         <span className="relative flex items-center gap-3 font-medium">
-          <IconUSFlag className="h-6 w-6 sm:h-[30px] sm:w-[30px]" /> USD
+          <Usdc className="h-6 w-6 sm:h-[30px] sm:w-[30px]" /> USDC
         </span>
         <span className="absolute top-0 h-full w-[1px] bg-gray-100 ltr:left-24 rtl:right-24 dark:bg-gray-700" />
         <span className="text-sm sm:text-base">
