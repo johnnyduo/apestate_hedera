@@ -7,15 +7,31 @@ import { Plus } from '@/components/icons/plus';
 import ActiveLink from '@/components/ui/links/active-link';
 import Trade from '@/components/ui/trade';
 import RootLayout from '@/layouts/_root-layout';
-import { fetchUsdcBalance, THBUSD } from '@/lib/contract';
+import {
+  executeBorrow,
+  executeShort,
+  fetchUsdcBalance,
+  refreshOraclePrice,
+  THBUSD,
+  usdcApprove,
+} from '@/lib/contract';
 import useContractData from '@/lib/hooks/use-contract-data';
 import { ethers } from 'ethers';
-import { useState, useCallback, useEffect } from 'react';
+import { useState, useCallback, useEffect, useContext } from 'react';
+import { WalletContext } from '@/lib/hooks/use-connect';
+
+interface BorrowPosition {
+  landId: number;
+  usdValue: number;
+  tokenValue: number;
+}
 
 const BORROW_RATIO = 0.799;
 
 const LiquidityPage: NextPageWithLayout = () => {
   const contractData = useContractData();
+
+  const { address } = useContext(WalletContext);
 
   const [usdValue, setUsdValue] = useState(0);
   const [usdBalance, setUsdBalance] = useState(0);
@@ -29,6 +45,8 @@ const LiquidityPage: NextPageWithLayout = () => {
 
   const [approved, setApproved] = useState(false);
   const [executing, setExecuting] = useState(false);
+
+  const [borrowPositions, setBorrowPositions] = useState<BorrowPosition[]>([]);
 
   const refreshUsdcBalance = useCallback(async () => {
     const usdBalanceRaw = await fetchUsdcBalance();
@@ -74,6 +92,40 @@ const LiquidityPage: NextPageWithLayout = () => {
       setApproved(false);
     },
     [fetchPrice, setUsdValue]
+  );
+
+  const refreshBorrowPositions = useCallback(() => {
+    const positions: BorrowPosition[] = JSON.parse(
+      window.localStorage.getItem(`APESTATE_BORROW_${address}`) || '[]'
+    );
+    setBorrowPositions(positions);
+    return positions;
+  }, [setBorrowPositions]);
+
+  const addBorrowPositions = useCallback(
+    (position: BorrowPosition) => {
+      const positions = refreshBorrowPositions();
+      positions.push(position);
+      window.localStorage.setItem(
+        `APESTATE_BORROW_${address}`,
+        JSON.stringify(positions)
+      );
+      refreshBorrowPositions();
+    },
+    [refreshBorrowPositions]
+  );
+
+  const removeBorrowPositions = useCallback(
+    (i: number) => {
+      const positions = refreshBorrowPositions();
+      positions.splice(i, 1);
+      window.localStorage.setItem(
+        `APESTATE_BORROW_${address}`,
+        JSON.stringify(positions)
+      );
+      refreshBorrowPositions();
+    },
+    [refreshBorrowPositions]
   );
 
   useEffect(() => {
@@ -143,29 +195,117 @@ const LiquidityPage: NextPageWithLayout = () => {
             }
           />
           <TransactionInfo label={'Borrow Ratio'} value={'80%'} />
+          <TransactionInfo label={'Borrow Interest'} value={'1%'} />
         </div>
-        <div className="mt-6 grid grid-cols-2 gap-2.5 xs:mt-8">
-          <ActiveLink href="/liquidity-position">
+
+        {priceUpdatedAt * 1000 < Date.now() - 3600 * 1000 ? (
+          <Button
+            size="large"
+            shape="rounded"
+            fullWidth={true}
+            disabled={executing}
+            className="mt-6 uppercase xs:mt-8 xs:tracking-widest"
+            onClick={async () => {
+              try {
+                setExecuting(true);
+                await refreshOraclePrice(landId);
+              } catch (err) {
+                console.error(err);
+              } finally {
+                setExecuting(false);
+              }
+            }}
+          >
+            UPDATE RATE
+          </Button>
+        ) : !approved ? (
+          <div className="mt-6 grid grid-cols-1 gap-2.5 xs:mt-8">
             <Button
               size="large"
               shape="rounded"
               fullWidth={true}
+              disabled={executing}
+              className="mt-6 uppercase xs:mt-8 xs:tracking-widest"
+              onClick={async () => {
+                try {
+                  setExecuting(true);
+                  await usdcApprove(usdValue);
+                  setApproved(true);
+                } catch (err) {
+                  console.error(err);
+                } finally {
+                  setExecuting(false);
+                }
+              }}
+            >
+              APPROVE
+            </Button>
+          </div>
+        ) : (
+          <div className="mt-6 grid grid-cols-2 gap-2.5 xs:mt-8">
+            <Button
+              size="large"
+              shape="rounded"
+              fullWidth={true}
+              disabled={executing}
               className="uppercase"
+              onClick={async () => {
+                try {
+                  setExecuting(true);
+
+                  await executeBorrow(landId, usdValue, tokenValue);
+
+                  addBorrowPositions({
+                    landId,
+                    usdValue,
+                    tokenValue,
+                  });
+
+                  setUsdValue(0);
+                  setTokenValue(0);
+                  fetchPrice();
+                } catch (err) {
+                  console.error(err);
+                } finally {
+                  setExecuting(false);
+                }
+              }}
             >
               BORROW
             </Button>
-          </ActiveLink>
-          <ActiveLink href="/liquidity-position">
+
             <Button
               size="large"
               shape="rounded"
               fullWidth={true}
+              disabled={executing}
               className="uppercase"
+              onClick={async () => {
+                try {
+                  setExecuting(true);
+
+                  await executeShort(landId, usdValue, tokenValue);
+
+                  addBorrowPositions({
+                    landId,
+                    usdValue,
+                    tokenValue,
+                  });
+
+                  setUsdValue(0);
+                  setTokenValue(0);
+                  fetchPrice();
+                } catch (err) {
+                  console.error(err);
+                } finally {
+                  setExecuting(false);
+                }
+              }}
             >
               SHORT
             </Button>
-          </ActiveLink>
-        </div>
+          </div>
+        )}
       </Trade>
     </>
   );

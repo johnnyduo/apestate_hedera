@@ -1,4 +1,4 @@
-import { useState, Fragment } from 'react';
+import { useState, Fragment, useEffect } from 'react';
 import { format } from 'date-fns';
 import cn from 'classnames';
 import {
@@ -27,6 +27,9 @@ import {
   monthlyComparison,
   yearlyComparison,
 } from '@/data/static/price-history';
+import useContractData from '@/lib/hooks/use-contract-data';
+import { ethers } from 'ethers';
+import { THBUSD } from '@/lib/contract';
 
 function CustomAxis({ x, y, payload }: any) {
   return (
@@ -70,7 +73,8 @@ function RadioGroupOption({ value }: RadioOptionProps) {
 export default function ComparisonChart() {
   const { theme } = useTheme();
   const breakpoint = useBreakpoint();
-  const [price, setPrice] = useState(6.2);
+  const contractData = useContractData();
+  const [price, setPrice] = useState(0);
   const [date, setDate] = useState(1697957200);
   const [status, setStatus] = useState('Month');
   const [chartData, setChartData] = useState(monthlyComparison);
@@ -96,6 +100,14 @@ export default function ComparisonChart() {
         break;
     }
   };
+
+  useEffect(() => {
+    if (contractData[0]) {
+      setPrice(
+        parseFloat(ethers.utils.formatEther(contractData[0].price)) * THBUSD
+      );
+    }
+  }, [contractData]);
 
   return (
     <div className="rounded-lg bg-white p-6 shadow-card dark:bg-light-dark sm:p-8">
@@ -140,7 +152,10 @@ export default function ComparisonChart() {
                 toggleCoin ? 'flex-row-reverse' : 'flex-row'
               )}
             >
-              <span>PYT</span>/<span>USDC</span>
+              <span>USD</span>/
+              <span>
+                m<sup>2</sup>
+              </span>
             </span>
 
             <span
@@ -192,15 +207,15 @@ export default function ComparisonChart() {
                 setDate(
                   data.activePayload && data.activePayload[0].payload.date
                 );
-                setPrice(
-                  data.activePayload && data.activePayload[0].payload.btc
-                );
-                setPriceDiff(
-                  data.activePayload && data.activePayload[0].payload.diff
-                );
-                setPercentage(
-                  data.activePayload && data.activePayload[0].payload.percentage
-                );
+                // setPrice(
+                //   data.activePayload && data.activePayload[0].payload.btc
+                // );
+                // setPriceDiff(
+                //   data.activePayload && data.activePayload[0].payload.diff
+                // );
+                // setPercentage(
+                //   data.activePayload && data.activePayload[0].payload.percentage
+                // );
               }
             }}
           >

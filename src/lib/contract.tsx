@@ -239,3 +239,43 @@ export async function executeSell(
     await Exchange.sell(landId, ethers.utils.parseEther(shareAmount.toString()))
   ).wait();
 }
+
+export async function executeBorrow(
+  landId: number,
+  usdAmount: string | number,
+  shareAmount: string | number
+) {
+  const Exchange = new ethers.Contract(
+    process.env.NEXT_PUBLIC_EXCHANGE_CONTRACT!,
+    ExchangeABI,
+    getSigner()
+  );
+
+  await (
+    await Exchange.borrow(
+      landId,
+      ethers.utils.parseEther(usdAmount.toString()),
+      ethers.utils.parseEther(shareAmount.toString())
+    )
+  ).wait();
+}
+
+export async function executeShort(
+  landId: number,
+  usdAmount: string | number,
+  shareAmount: string | number
+) {
+  const Exchange = new ethers.Contract(
+    process.env.NEXT_PUBLIC_EXCHANGE_CONTRACT!,
+    ExchangeABI,
+    getSigner()
+  );
+
+  await (
+    await Exchange.borrowAndSell(
+      landId,
+      ethers.utils.parseEther(usdAmount.toString()),
+      ethers.utils.parseEther(shareAmount.toString())
+    )
+  ).wait();
+}
