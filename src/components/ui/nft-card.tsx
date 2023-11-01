@@ -38,7 +38,7 @@ export default function NFTGrid({
         </AnchorLink>
       </div>
       <AnchorLink href="/nft-details" className="relative block w-full">
-        <Image src={image} placeholder="blur" width={450} height={450} alt="" />
+        <Image className="h-48" src={image} placeholder="blur" width={450} height={450} alt="" />
       </AnchorLink>
 
       <div className="p-5">
