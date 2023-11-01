@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useCallback, useContext, useEffect, useState } from 'react';
 import { NextSeo } from 'next-seo';
 import ComparisonChart from '@/components/ui/chats/comparison-chart';
 import Avatar from '@/components/ui/avatar';
@@ -14,7 +14,8 @@ import { useBreakpoint } from '@/lib/hooks/use-breakpoint';
 import AuthorImage from '@/assets/images/owner.jpeg';
 import useContractData from '@/lib/hooks/use-contract-data';
 import { ethers } from 'ethers';
-import { THBUSD } from '@/lib/contract';
+import { THBUSD, fetchUsdcBalance } from '@/lib/contract';
+import { WalletContext } from '@/lib/hooks/use-connect';
 
 const topPoolsLimit = (breakpoint: string) => {
   switch (breakpoint) {
@@ -28,6 +29,7 @@ const topPoolsLimit = (breakpoint: string) => {
 };
 
 export default function MinimalScreen() {
+  const { address } = useContext(WalletContext);
   const [limit, setLimit] = useState(4);
   const [priceFeeds, setPriceFeeds] = useState<any[]>(priceFeedData);
   const breakpoint = useBreakpoint();
@@ -54,6 +56,23 @@ export default function MinimalScreen() {
     }
   }, [contractData]);
 
+  const [usdBalance, setUsdBalance] = useState(0);
+
+  const refreshUsdcBalance = useCallback(async () => {
+    const usdBalanceRaw = await fetchUsdcBalance();
+    setUsdBalance(
+      parseFloat(
+        parseFloat(ethers.utils.formatEther(usdBalanceRaw || '0')).toFixed(2)
+      )
+    );
+  }, [setUsdBalance]);
+
+  useEffect(() => {
+    if (address) {
+      refreshUsdcBalance();
+    }
+  }, [address]);
+
   return (
     <>
       <NextSeo title="Real Apestate" description="Real Apestate" />
@@ -77,7 +96,7 @@ export default function MinimalScreen() {
                   My Balance
                 </h3>
                 <div className="mb-7 text-center font-medium tracking-tighter text-gray-900 dark:text-white xl:text-2xl 3xl:mb-8 3xl:text-[32px]">
-                  $1,086,000
+                  ${usdBalance.toLocaleString('en-US')}
                 </div>
               </div>
               <span className="-mx-6 block border-t border-dashed border-t-gray-200 dark:border-t-gray-700 3xl:-mx-8" />

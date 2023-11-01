@@ -123,7 +123,10 @@ export function LivePriceFeed({
         </div>
       </div>
 
-      <div className="-mt-2 text-sm tracking-tighter text-gray-600 ltr:mr-5 rtl:ml-5 dark:text-gray-400 2xl:w-24 3xl:w-auto" style={{ width: 'auto' }}> 
+      <div
+        className="-mt-2 text-sm tracking-tighter text-gray-600 ltr:mr-5 rtl:ml-5 dark:text-gray-400 2xl:w-24 3xl:w-auto"
+        style={{ width: 'auto' }}
+      >
         Updated At: {new Date(lastUpdatedAt * 1000).toLocaleString()}
       </div>
     </div>

@@ -37,8 +37,20 @@ export default function NFTGrid({
           <span className="overflow-hidden text-ellipsis">@{author}</span>
         </AnchorLink>
       </div>
+<<<<<<< HEAD
       <AnchorLink href="/swap" className="relative block w-full">
         <Image className="h-48" src={image} placeholder="blur" width={450} height={450} alt="" />
+=======
+      <AnchorLink href="#" className="relative block w-full">
+        <Image
+          className="h-48"
+          src={image}
+          placeholder="blur"
+          width={450}
+          height={450}
+          alt=""
+        />
+>>>>>>> bdc1fbcae972322941b2d19b52c48cc48e8c056b
       </AnchorLink>
 
       <div className="p-5">
