@@ -11,7 +11,7 @@ import PriceFeedSlider from '@/components/ui/live-price-feed';
 import { priceFeedData } from '@/data/static/price-feed';
 import { useBreakpoint } from '@/lib/hooks/use-breakpoint';
 //images
-import AuthorImage from '@/assets/images/author.jpg';
+import AuthorImage from '@/assets/images/owner.jpeg';
 import useContractData from '@/lib/hooks/use-contract-data';
 import { ethers } from 'ethers';
 import { THBUSD } from '@/lib/contract';
@@ -69,7 +69,7 @@ export default function MinimalScreen() {
               <div className="mb-8 h-full">
                 <Avatar
                   image={AuthorImage}
-                  alt="Author"
+                  alt="Apestate"
                   className="mx-auto mb-6"
                   size="lg"
                 />
