@@ -25,7 +25,7 @@ export default function NFTGrid({
     <div className="relative overflow-hidden rounded-lg bg-white shadow-card transition-all duration-200 hover:shadow-large dark:bg-light-dark">
       <div className="p-4">
         <AnchorLink
-          href="#"
+          href="/swap"
           className="flex items-center text-sm font-medium text-gray-600 transition hover:text-gray-900 dark:text-gray-300 dark:hover:text-white"
         >
           <Avatar
@@ -57,7 +57,7 @@ export default function NFTGrid({
         </AnchorLink>
         <div className="mt-1.5 flex">
           <AnchorLink
-            href="#"
+            href="/swap"
             className="inline-flex items-center text-xs text-gray-600 dark:text-gray-400"
           >
             {collection}
