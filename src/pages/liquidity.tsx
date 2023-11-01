@@ -28,6 +28,33 @@ interface BorrowPosition {
 
 const BORROW_RATIO = 0.799;
 
+function BorrowPositionControl({
+  position,
+  onRedeem,
+}: {
+  position: BorrowPosition;
+  onRedeem: () => void;
+}) {
+  const contractData = useContractData();
+
+  const [executing, setExecuting] = useState(false);
+
+  return (
+    <>
+      <div>
+        {position.tokenValue}{' '}
+        {contractData && contractData[position.landId - 1].symbol}
+      </div>
+      <div>
+        {position.tokenValue}{' '}
+        {contractData && contractData[position.landId - 1].symbol}
+      </div>
+      <div>{position.usdValue * 0.99} USDC</div>
+      <div className="underline hover:cursor-pointer">Redeem</div>
+    </>
+  );
+}
+
 const LiquidityPage: NextPageWithLayout = () => {
   const contractData = useContractData();
 
@@ -134,6 +161,7 @@ const LiquidityPage: NextPageWithLayout = () => {
 
   useEffect(() => {
     fetchPrice();
+    refreshBorrowPositions();
   }, [contractData]);
 
   return (
@@ -306,6 +334,28 @@ const LiquidityPage: NextPageWithLayout = () => {
             </Button>
           </div>
         )}
+
+        <div className="mt-8">
+          <div className="text-center text-lg">Redeem</div>
+
+          <div
+            className="mt-4 grid gap-y-1"
+            style={{ gridTemplateColumns: 'auto auto auto 64px' }}
+          >
+            <div className="font-bold">AMOUNT</div>
+            <div className="font-bold">BALANCE</div>
+            <div className="font-bold">VALUE</div>
+            <div>&nbsp;</div>
+
+            {borrowPositions.map((position, i) => (
+              <BorrowPositionControl
+                position={position}
+                onRedeem={() => removeBorrowPositions(i)}
+                key={i}
+              ></BorrowPositionControl>
+            ))}
+          </div>
+        </div>
       </Trade>
     </>
   );
