@@ -25,7 +25,7 @@ export default function NFTGrid({
     <div className="relative overflow-hidden rounded-lg bg-white shadow-card transition-all duration-200 hover:shadow-large dark:bg-light-dark">
       <div className="p-4">
         <AnchorLink
-          href="/"
+          href="#"
           className="flex items-center text-sm font-medium text-gray-600 transition hover:text-gray-900 dark:text-gray-300 dark:hover:text-white"
         >
           <Avatar
@@ -37,20 +37,20 @@ export default function NFTGrid({
           <span className="overflow-hidden text-ellipsis">@{author}</span>
         </AnchorLink>
       </div>
-      <AnchorLink href="/nft-details" className="relative block w-full">
+      <AnchorLink href="#" className="relative block w-full">
         <Image className="h-48" src={image} placeholder="blur" width={450} height={450} alt="" />
       </AnchorLink>
 
       <div className="p-5">
         <AnchorLink
-          href="/nft-details"
+          href="#"
           className="text-sm font-medium text-black dark:text-white"
         >
           {name}
         </AnchorLink>
         <div className="mt-1.5 flex">
           <AnchorLink
-            href="/"
+            href="#"
             className="inline-flex items-center text-xs text-gray-600 dark:text-gray-400"
           >
             {collection}
