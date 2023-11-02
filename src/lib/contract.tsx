@@ -195,7 +195,7 @@ export async function usdcApprove(amount: string | number) {
     getSigner()
   );
 
-  await (
+  return await (
     await FakeUSDC.approve(
       Exchange.address,
       ethers.utils.parseEther(amount.toString())
@@ -210,7 +210,7 @@ export async function refreshOraclePrice(landId: number) {
     getSigner()
   );
 
-  await (await Oracle.requestVolumeData(landId)).wait();
+  return await (await Oracle.requestVolumeData(landId)).wait();
 }
 
 export async function executeBuy(landId: number, usdAmount: string | number) {
@@ -220,7 +220,7 @@ export async function executeBuy(landId: number, usdAmount: string | number) {
     getSigner()
   );
 
-  await (
+  return await (
     await Exchange.buy(landId, ethers.utils.parseEther(usdAmount.toString()))
   ).wait();
 }
@@ -235,7 +235,7 @@ export async function executeSell(
     getSigner()
   );
 
-  await (
+  return await (
     await Exchange.sell(landId, ethers.utils.parseEther(shareAmount.toString()))
   ).wait();
 }
@@ -251,7 +251,7 @@ export async function executeBorrow(
     getSigner()
   );
 
-  await (
+  return await (
     await Exchange.borrow(
       landId,
       ethers.utils.parseEther(usdAmount.toString()),
@@ -271,11 +271,21 @@ export async function executeShort(
     getSigner()
   );
 
-  await (
+  return await (
     await Exchange.borrowAndSell(
       landId,
       ethers.utils.parseEther(usdAmount.toString()),
       ethers.utils.parseEther(shareAmount.toString())
     )
   ).wait();
+}
+
+export async function executeRedeem(positionId: number) {
+  const Exchange = new ethers.Contract(
+    process.env.NEXT_PUBLIC_EXCHANGE_CONTRACT!,
+    ExchangeABI,
+    getSigner()
+  );
+
+  return await (await Exchange.redeem(positionId)).wait();
 }

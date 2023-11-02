@@ -185,6 +185,7 @@ const SwapPage: NextPageWithLayout = () => {
                 await refreshOraclePrice(landId);
               } catch (err) {
                 console.error(err);
+                window.alert('UPDATE RATE ERROR');
               } finally {
                 setExecuting(false);
               }
@@ -206,6 +207,7 @@ const SwapPage: NextPageWithLayout = () => {
                 setApproved(true);
               } catch (err) {
                 console.error(err);
+                window.alert('APPROVE ERROR');
               } finally {
                 setExecuting(false);
               }
@@ -232,9 +234,11 @@ const SwapPage: NextPageWithLayout = () => {
 
                 setUsdValue(0);
                 setTokenValue(0);
+                setApproved(false);
                 fetchPrice();
               } catch (err) {
                 console.error(err);
+                window.alert(`${toggleCoin ? 'SELL' : 'BUY'} ERROR`);
               } finally {
                 setExecuting(false);
               }

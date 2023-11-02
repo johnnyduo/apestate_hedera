@@ -9,6 +9,7 @@ import Trade from '@/components/ui/trade';
 import RootLayout from '@/layouts/_root-layout';
 import {
   executeBorrow,
+  executeRedeem,
   executeShort,
   fetchUsdcBalance,
   refreshOraclePrice,
@@ -21,6 +22,7 @@ import { useState, useCallback, useEffect, useContext } from 'react';
 import { WalletContext } from '@/lib/hooks/use-connect';
 
 interface BorrowPosition {
+  positionId: number;
   landId: number;
   usdValue: number;
   tokenValue: number;
@@ -39,18 +41,42 @@ function BorrowPositionControl({
 
   const [executing, setExecuting] = useState(false);
 
+  const redeem = useCallback(async () => {
+    try {
+      setExecuting(true);
+      await executeRedeem(position.positionId);
+      onRedeem();
+    } catch (err) {
+      console.error(err);
+      window.alert('REDEEM ERROR');
+    } finally {
+      setExecuting(false);
+    }
+  }, [position]);
+
   return (
     <>
       <div>
         {position.tokenValue}{' '}
-        {contractData && contractData[position.landId - 1].symbol}
+        {contractData &&
+          contractData[position.landId - 1] &&
+          contractData[position.landId - 1].symbol}
       </div>
       <div>
         {position.tokenValue}{' '}
-        {contractData && contractData[position.landId - 1].symbol}
+        {contractData &&
+          contractData[position.landId - 1] &&
+          contractData[position.landId - 1].symbol}
       </div>
       <div>{position.usdValue * 0.99} USDC</div>
-      <div className="underline hover:cursor-pointer">Redeem</div>
+      <div
+        className={
+          'underline hover:cursor-pointer ' + (executing ? 'opacity-60' : '')
+        }
+        onClick={() => !executing && redeem()}
+      >
+        Redeem
+      </div>
     </>
   );
 }
@@ -239,6 +265,7 @@ const LiquidityPage: NextPageWithLayout = () => {
                 await refreshOraclePrice(landId);
               } catch (err) {
                 console.error(err);
+                window.alert('UPDATE RATE ERROR');
               } finally {
                 setExecuting(false);
               }
@@ -261,6 +288,7 @@ const LiquidityPage: NextPageWithLayout = () => {
                   setApproved(true);
                 } catch (err) {
                   console.error(err);
+                  window.alert('APPROVE ERROR');
                 } finally {
                   setExecuting(false);
                 }
@@ -281,9 +309,24 @@ const LiquidityPage: NextPageWithLayout = () => {
                 try {
                   setExecuting(true);
 
-                  await executeBorrow(landId, usdValue, tokenValue);
+                  const receipt = await executeBorrow(
+                    landId,
+                    usdValue,
+                    tokenValue
+                  );
+
+                  console.log(receipt);
+
+                  const positionId = parseInt(
+                    receipt.logs.find(
+                      (log: any) =>
+                        log.topics[0] ==
+                        '0x2dd79f4fccfd18c360ce7f9132f3621bf05eee18f995224badb32d17f172df73'
+                    ).topics[3]
+                  );
 
                   addBorrowPositions({
+                    positionId,
                     landId,
                     usdValue,
                     tokenValue,
@@ -291,9 +334,11 @@ const LiquidityPage: NextPageWithLayout = () => {
 
                   setUsdValue(0);
                   setTokenValue(0);
+                  setApproved(false);
                   fetchPrice();
                 } catch (err) {
                   console.error(err);
+                  window.alert('BORROW ERROR');
                 } finally {
                   setExecuting(false);
                 }
@@ -312,9 +357,24 @@ const LiquidityPage: NextPageWithLayout = () => {
                 try {
                   setExecuting(true);
 
-                  await executeShort(landId, usdValue, tokenValue);
+                  const receipt = await executeShort(
+                    landId,
+                    usdValue,
+                    tokenValue
+                  );
+
+                  console.log(receipt);
+
+                  const positionId = parseInt(
+                    receipt.logs.find(
+                      (log: any) =>
+                        log.topics[0] ==
+                        '0x2dd79f4fccfd18c360ce7f9132f3621bf05eee18f995224badb32d17f172df73'
+                    ).topics[3]
+                  );
 
                   addBorrowPositions({
+                    positionId,
                     landId,
                     usdValue,
                     tokenValue,
@@ -322,9 +382,11 @@ const LiquidityPage: NextPageWithLayout = () => {
 
                   setUsdValue(0);
                   setTokenValue(0);
+                  setApproved(false);
                   fetchPrice();
                 } catch (err) {
                   console.error(err);
+                  window.alert('SHORT ERROR');
                 } finally {
                   setExecuting(false);
                 }
