@@ -43,8 +43,8 @@ export default function CreateNFTRetro() {
   return (
     <>
       <NextSeo
-        title="Create NFT"
-        description="Criptic - React Next Web3 NFT Crypto Dashboard Template"
+        title="Create Lands"
+        description="Apestate"
       />
       <form>
         <div className="mx-auto w-full pt-8 sm:pt-12 lg:px-8 xl:px-10 2xl:px-0">

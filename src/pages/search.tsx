@@ -23,7 +23,7 @@ const SearchPage: NextPageWithLayout<
     return (
       <>
         <NextSeo
-          title="Explore NTF"
+          title="Explore Lands"
           description="Apestate"
         />
         <RetroSearch />
@@ -35,7 +35,7 @@ const SearchPage: NextPageWithLayout<
   return (
     <>
       <NextSeo
-        title="Explore NTF"
+        title="Explore Lands"
         description="Apestate"
       />
 

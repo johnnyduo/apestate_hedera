@@ -75,7 +75,7 @@ export default function MinimalScreen() {
 
   return (
     <>
-      <NextSeo title="Real Apestate" description="Real Apestate" />
+      <NextSeo title="Apestate Home" description="Real Apestate" />
       <div className="">
         <PriceFeedSlider
           limit={4}
