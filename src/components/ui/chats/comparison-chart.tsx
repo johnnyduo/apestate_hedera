@@ -106,6 +106,7 @@ export default function ComparisonChart() {
       setPrice(
         parseFloat(ethers.utils.formatEther(contractData[0].price)) * THBUSD
       );
+      setDate(contractData[0].lastUpdatedAt);
     }
   }, [contractData]);
 
@@ -145,7 +146,9 @@ export default function ComparisonChart() {
             </span>
           </div>
           <div className="mt-5 flex items-end gap-3 text-base font-medium text-gray-900 dark:text-white sm:text-xl lg:flex-wrap 2xl:flex-nowrap">
-            <span className="text-2xl font-semibold xl:text-4xl">{price}</span>
+            <span className="text-2xl font-semibold xl:text-4xl">
+              {toggleCoin ? (1 / price).toPrecision(4) : price}
+            </span>
             <span
               className={cn(
                 'flex items-end',
@@ -204,9 +207,9 @@ export default function ComparisonChart() {
             }}
             onMouseMove={(data) => {
               if (data.isTooltipActive) {
-                setDate(
-                  data.activePayload && data.activePayload[0].payload.date
-                );
+                // setDate(
+                //   data.activePayload && data.activePayload[0].payload.date
+                // );
                 // setPrice(
                 //   data.activePayload && data.activePayload[0].payload.btc
                 // );
