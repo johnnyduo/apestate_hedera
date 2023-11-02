@@ -107,7 +107,7 @@ const SwapPage: NextPageWithLayout = () => {
 
   return (
     <>
-      <NextSeo title="Farms" description="Apestate" />
+      <NextSeo title="Swap" description="Apestate" />
       <Trade>
         <div className="mb-5 border-b border-dashed border-gray-200 pb-5 dark:border-gray-800 xs:mb-7 xs:pb-6">
           <div

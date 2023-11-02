@@ -192,7 +192,7 @@ const LiquidityPage: NextPageWithLayout = () => {
 
   return (
     <>
-      <NextSeo title="Liquidity" description="Apestate" />
+      <NextSeo title="Trading" description="Apestate" />
       <Trade>
         <div className="mb-5 border-b border-dashed border-gray-200 pb-5 dark:border-gray-800 xs:mb-7 xs:pb-6">
           <div className="relative flex flex-col gap-3">
