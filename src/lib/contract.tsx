@@ -147,14 +147,14 @@ export function ContractDataProvider({ children }: { children: ReactNode }) {
   );
 }
 
-async function getSigner() {
+async function getSigner(ignoreAddress: boolean = false) {
   const provider = new ethers.providers.Web3Provider(window.ethereum, 'any');
   const signer = provider.getSigner();
   console.log(signer);
 
   const address = await signer.getAddress();
 
-  if (!address) {
+  if (!address && !ignoreAddress) {
     window.alert('Please connect wallet first');
     throw new Error('Please connect wallet first');
   }
@@ -170,7 +170,7 @@ async function getSigner() {
 }
 
 export async function fetchApproval(address?: string) {
-  const signer = await getSigner();
+  const signer = await getSigner(true);
   const approval = await FakeUSDC.allowance(
     address ?? (await signer.getAddress()),
     Exchange.address
@@ -179,7 +179,7 @@ export async function fetchApproval(address?: string) {
 }
 
 export async function fetchUsdcBalance(address?: string) {
-  const signer = await getSigner();
+  const signer = await getSigner(true);
   const balance = await FakeUSDC.balanceOf(
     address ?? (await signer.getAddress())
   );
