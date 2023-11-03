@@ -22,7 +22,7 @@ export const NFTList = [
     image: NFT2,
     name: 'Phaya Thai Land',
     collection: 'Bangkok, TH',
-    price: '750 USDC',
+    price: '520 USDC',
   },
   {
     id: 3,
@@ -31,7 +31,7 @@ export const NFTList = [
     image: NFT3,
     name: 'Sathorn Land',
     collection: 'Bangkok, TH',
-    price: '750 USDC',
+    price: '455 USDC',
   },
   {
     id: 4,
@@ -40,7 +40,7 @@ export const NFTList = [
     image: NFT4,
     name: 'Bangkapi Land',
     collection: 'Bangkok, TH',
-    price: '750 USDC',
+    price: '150 USDC',
   },
   {
     id: 5,
@@ -58,6 +58,6 @@ export const NFTList = [
     image: NFT5,
     name: 'Lat Prao Land',
     collection: 'Bangkok, TH',
-    price: '750 USDC',
+    price: '270 USDC',
   },
 ];
