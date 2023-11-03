@@ -115,7 +115,7 @@ export default function MinimalScreen() {
             </div>
           </div>
 
-          <div className="md:col-span-2 lg:col-span-full xl:col-start-1 xl:col-end-9 xl:row-start-2 xl:row-end-3 2xl:col-start-1 2xl:col-end-10 2xl:row-start-2 2xl:row-end-3 3xl:col-span-9 3xl:row-start-2 3xl:row-end-3">
+          <div className="md:col-span-2 lg:col-span-full xl:col-start-1 xl:col-end-12 xl:row-start-2 xl:row-end-3 2xl:col-start-1 2xl:col-end-12 2xl:row-start-2 2xl:row-end-3 3xl:col-span-12 3xl:row-start-2 3xl:row-end-3">
             <TransactionTable />
           </div>
 

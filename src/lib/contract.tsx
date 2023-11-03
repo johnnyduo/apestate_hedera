@@ -147,15 +147,30 @@ export function ContractDataProvider({ children }: { children: ReactNode }) {
   );
 }
 
-function getSigner() {
+async function getSigner(ignoreAddress: boolean = false) {
   const provider = new ethers.providers.Web3Provider(window.ethereum, 'any');
   const signer = provider.getSigner();
   console.log(signer);
+
+  const address = await signer.getAddress();
+
+  if (!address && !ignoreAddress) {
+    window.alert('Please connect wallet first');
+    throw new Error('Please connect wallet first');
+  }
+
+  const chainId = await signer.getChainId();
+
+  if (chainId != 97) {
+    window.alert('Please switch to binance testnet');
+    throw new Error('Please switch to binance testnet');
+  }
+
   return signer;
 }
 
 export async function fetchApproval(address?: string) {
-  const signer = getSigner();
+  const signer = await getSigner(true);
   const approval = await FakeUSDC.allowance(
     address ?? (await signer.getAddress()),
     Exchange.address
@@ -164,7 +179,7 @@ export async function fetchApproval(address?: string) {
 }
 
 export async function fetchUsdcBalance(address?: string) {
-  const signer = getSigner();
+  const signer = await getSigner(true);
   const balance = await FakeUSDC.balanceOf(
     address ?? (await signer.getAddress())
   );
@@ -172,7 +187,7 @@ export async function fetchUsdcBalance(address?: string) {
 }
 
 export async function usdcFaucet(amount: string | number) {
-  const signer = getSigner();
+  const signer = await getSigner();
 
   const FakeUSDC = new ethers.Contract(
     process.env.NEXT_PUBLIC_USDC_CONTRACT!,
@@ -192,7 +207,7 @@ export async function usdcApprove(amount: string | number) {
   const FakeUSDC = new ethers.Contract(
     process.env.NEXT_PUBLIC_USDC_CONTRACT!,
     FakeUSDCABI,
-    getSigner()
+    await getSigner()
   );
 
   return await (
@@ -207,7 +222,7 @@ export async function refreshOraclePrice(landId: number) {
   const Oracle = new ethers.Contract(
     process.env.NEXT_PUBLIC_ORACLE_CONTRACT!,
     OracleABI,
-    getSigner()
+    await getSigner()
   );
 
   return await (await Oracle.requestVolumeData(landId)).wait();
@@ -217,7 +232,7 @@ export async function executeBuy(landId: number, usdAmount: string | number) {
   const Exchange = new ethers.Contract(
     process.env.NEXT_PUBLIC_EXCHANGE_CONTRACT!,
     ExchangeABI,
-    getSigner()
+    await getSigner()
   );
 
   return await (
@@ -232,7 +247,7 @@ export async function executeSell(
   const Exchange = new ethers.Contract(
     process.env.NEXT_PUBLIC_EXCHANGE_CONTRACT!,
     ExchangeABI,
-    getSigner()
+    await getSigner()
   );
 
   return await (
@@ -248,7 +263,7 @@ export async function executeBorrow(
   const Exchange = new ethers.Contract(
     process.env.NEXT_PUBLIC_EXCHANGE_CONTRACT!,
     ExchangeABI,
-    getSigner()
+    await getSigner()
   );
 
   return await (
@@ -268,7 +283,7 @@ export async function executeShort(
   const Exchange = new ethers.Contract(
     process.env.NEXT_PUBLIC_EXCHANGE_CONTRACT!,
     ExchangeABI,
-    getSigner()
+    await getSigner()
   );
 
   return await (
@@ -284,7 +299,7 @@ export async function executeRedeem(positionId: number) {
   const Exchange = new ethers.Contract(
     process.env.NEXT_PUBLIC_EXCHANGE_CONTRACT!,
     ExchangeABI,
-    getSigner()
+    await getSigner()
   );
 
   return await (await Exchange.redeem(positionId)).wait();
