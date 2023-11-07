@@ -1,4 +1,4 @@
-import { useCallback, useEffect, useState } from 'react';
+import { useCallback, useContext, useEffect, useState } from 'react';
 import type { NextPageWithLayout } from '@/types';
 import cn from 'classnames';
 import { NextSeo } from 'next-seo';
@@ -18,6 +18,7 @@ import {
   refreshOraclePrice,
   usdcApprove,
 } from '@/lib/contract';
+import { WalletContext } from '@/lib/hooks/use-connect';
 
 const EXCHANGE_FEE = 30.1 / 10000;
 
@@ -25,6 +26,8 @@ const SwapPage: NextPageWithLayout = () => {
   let [toggleCoin, setToggleCoin] = useState(false);
 
   const contractData = useContractData();
+
+  const { address } = useContext(WalletContext);
 
   const [usdValue, setUsdValue] = useState(0);
   const [usdBalance, setUsdBalance] = useState(0);
@@ -180,6 +183,10 @@ const SwapPage: NextPageWithLayout = () => {
             disabled={executing}
             className="mt-6 uppercase xs:mt-8 xs:tracking-widest"
             onClick={async () => {
+              if (!address) {
+                return window.alert('Please connect your wallet');
+              }
+
               try {
                 setExecuting(true);
                 await refreshOraclePrice(landId);
@@ -201,6 +208,10 @@ const SwapPage: NextPageWithLayout = () => {
             disabled={executing}
             className="mt-6 uppercase xs:mt-8 xs:tracking-widest"
             onClick={async () => {
+              if (!address) {
+                return window.alert('Please connect your wallet');
+              }
+
               try {
                 setExecuting(true);
                 await usdcApprove(usdValue);
@@ -223,6 +234,10 @@ const SwapPage: NextPageWithLayout = () => {
             disabled={executing}
             className="mt-6 uppercase xs:mt-8 xs:tracking-widest"
             onClick={async () => {
+              if (!address) {
+                return window.alert('Please connect your wallet');
+              }
+
               try {
                 setExecuting(true);
 

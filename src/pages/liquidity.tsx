@@ -260,6 +260,10 @@ const LiquidityPage: NextPageWithLayout = () => {
             disabled={executing}
             className="mt-6 uppercase xs:mt-8 xs:tracking-widest"
             onClick={async () => {
+              if (!address) {
+                return window.alert('Please connect your wallet');
+              }
+
               try {
                 setExecuting(true);
                 await refreshOraclePrice(landId);
@@ -282,6 +286,10 @@ const LiquidityPage: NextPageWithLayout = () => {
               disabled={executing}
               className="mt-6 uppercase xs:mt-8 xs:tracking-widest"
               onClick={async () => {
+                if (!address) {
+                  return window.alert('Please connect your wallet');
+                }
+
                 try {
                   setExecuting(true);
                   await usdcApprove(usdValue);
@@ -306,6 +314,10 @@ const LiquidityPage: NextPageWithLayout = () => {
               disabled={executing}
               className="uppercase"
               onClick={async () => {
+                if (!address) {
+                  return window.alert('Please connect your wallet');
+                }
+
                 try {
                   setExecuting(true);
 
@@ -354,6 +366,10 @@ const LiquidityPage: NextPageWithLayout = () => {
               disabled={executing}
               className="uppercase"
               onClick={async () => {
+                if (!address) {
+                  return window.alert('Please connect your wallet');
+                }
+
                 try {
                   setExecuting(true);
 
