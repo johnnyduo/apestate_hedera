@@ -20,6 +20,7 @@ import useContractData from '@/lib/hooks/use-contract-data';
 import { ethers } from 'ethers';
 import { useState, useCallback, useEffect, useContext } from 'react';
 import { WalletContext } from '@/lib/hooks/use-connect';
+import LeverageBox from '@/components/ui/leverage-box';
 
 interface BorrowPosition {
   positionId: number;
@@ -250,6 +251,10 @@ const LiquidityPage: NextPageWithLayout = () => {
           />
           <TransactionInfo label={'Borrow Ratio'} value={'80%'} />
           <TransactionInfo label={'Borrow Interest'} value={'1%'} />
+        </div>
+
+        <div className="mt-4">
+          <LeverageBox />
         </div>
 
         {priceUpdatedAt * 1000 < Date.now() - 3600 * 1000 ? (

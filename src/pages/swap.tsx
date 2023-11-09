@@ -19,6 +19,7 @@ import {
   usdcApprove,
 } from '@/lib/contract';
 import { WalletContext } from '@/lib/hooks/use-connect';
+import LeverageBox from '@/components/ui/leverage-box';
 
 const EXCHANGE_FEE = 30.1 / 10000;
 
@@ -173,6 +174,10 @@ const SwapPage: NextPageWithLayout = () => {
             }
           />
           <TransactionInfo label={'Exchange Fee'} value={'0.25%'} />
+        </div>
+
+        <div className="mt-4">
+          <LeverageBox />
         </div>
 
         {priceUpdatedAt * 1000 < Date.now() - 3600 * 1000 ? (
