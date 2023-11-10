@@ -13,7 +13,7 @@ export const NFTList = [
     image: NFT1,
     name: 'Thonglor Land',
     collection: 'Bangkok, TH',
-    price: '750 USDC',
+    price: '12950 USDC (฿463,480.50)',
   },
   {
     id: 2,
@@ -22,7 +22,7 @@ export const NFTList = [
     image: NFT2,
     name: 'Phaya Thai Land',
     collection: 'Bangkok, TH',
-    price: '520 USDC',
+    price: '4200 USDC (฿150,318.00)',
   },
   {
     id: 3,
@@ -31,7 +31,7 @@ export const NFTList = [
     image: NFT3,
     name: 'Sathorn Land',
     collection: 'Bangkok, TH',
-    price: '455 USDC',
+    price: '2072 USDC (฿74,175.53)',
   },
   {
     id: 4,
@@ -40,7 +40,7 @@ export const NFTList = [
     image: NFT4,
     name: 'Bangkapi Land',
     collection: 'Bangkok, TH',
-    price: '150 USDC',
+    price: '1050 USDC (฿37,588.95)',
   },
   {
     id: 5,
@@ -49,7 +49,7 @@ export const NFTList = [
     image: NFT2,
     name: 'Thonglor Land',
     collection: 'Bangkok, TH',
-    price: '750 USDC',
+    price: '12950 USDC (฿463,480.50)',
   },
   {
     id: 6,
@@ -58,6 +58,6 @@ export const NFTList = [
     image: NFT5,
     name: 'Lat Prao Land',
     collection: 'Bangkok, TH',
-    price: '270 USDC',
+    price: '1260 USDC (฿45,106.74)',
   },
 ];

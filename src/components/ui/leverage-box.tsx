@@ -3,7 +3,7 @@ import React, { useState } from 'react';
 export default function LeverageBox() {
   const [value, setValue] = useState('1x');
 
-  const leverage = ['1x', '2x', '4x', '8x', '16x', '32x', '64x'];
+  const leverage = ['1x', '15x', '30x', '45x', '60x', '75x'];
 
   return (
     <div className="flex">
