@@ -76,7 +76,7 @@ function BorrowPositionControl({
         }
         onClick={() => !executing && redeem()}
       >
-        Redeem
+        Close
       </div>
     </>
   );
@@ -419,7 +419,7 @@ const LiquidityPage: NextPageWithLayout = () => {
         )}
 
         <div className="mt-8">
-          <div className="text-center text-lg">Redeem</div>
+          <div className="text-center text-lg">Positions</div>
 
           <div
             className="mt-4 grid gap-y-1"
