@@ -196,6 +196,10 @@ const SwapPage: NextPageWithLayout = () => {
     [refreshLongPositions]
   );
 
+  useEffect(() => {
+    refreshLongPositions();
+  }, []);
+
   return (
     <>
       <NextSeo title="Swap" description="Apestate" />
