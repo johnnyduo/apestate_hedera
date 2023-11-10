@@ -29,7 +29,7 @@ interface BorrowPosition {
   tokenValue: number;
 }
 
-const BORROW_RATIO = 0.999;
+const BORROW_RATIO = 0.998;
 
 function BorrowPositionControl({
   position,
@@ -221,7 +221,7 @@ const LiquidityPage: NextPageWithLayout = () => {
               </Button>
             </div>
             <CoinInput
-              label={'Borrow'}
+              label={'To'}
               balance={tokenBalance.toFixed(4)}
               defaultCoinIndex={0}
               value={tokenValue}
@@ -311,8 +311,8 @@ const LiquidityPage: NextPageWithLayout = () => {
             </Button>
           </div>
         ) : (
-          <div className="mt-6 grid grid-cols-2 gap-2.5 xs:mt-8">
-            <Button
+          <div className="mt-6 grid gap-2.5 xs:mt-8">
+            {/* <Button
               size="large"
               shape="rounded"
               fullWidth={true}
@@ -362,7 +362,7 @@ const LiquidityPage: NextPageWithLayout = () => {
               }}
             >
               BORROW
-            </Button>
+            </Button> */}
 
             <Button
               size="large"
