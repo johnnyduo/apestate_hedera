@@ -249,8 +249,8 @@ const LiquidityPage: NextPageWithLayout = () => {
                 : undefined
             }
           />
-          <TransactionInfo label={'Borrow Ratio'} value={'80%'} />
-          <TransactionInfo label={'Borrow Interest'} value={'1%'} />
+          {/* <TransactionInfo label={'Borrow Ratio'} value={'80%'} /> */}
+          <TransactionInfo label={'Funding Rate'} value={'0.25%'} />
         </div>
 
         <div className="mt-4">
