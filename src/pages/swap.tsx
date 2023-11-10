@@ -249,7 +249,7 @@ const SwapPage: NextPageWithLayout = () => {
         </div>
         <div className="flex flex-col gap-4 xs:gap-[18px]">
           <TransactionInfo
-            label={'Rate'}
+            label={'Exchange Rate'}
             value={`${price.toFixed(2)} USD/m²`}
           />
           <TransactionInfo
