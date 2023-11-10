@@ -13,10 +13,7 @@ const LiquidityPositionPage: NextPageWithLayout = () => {
   let [isExpand, setIsExpand] = useState(false);
   return (
     <>
-      <NextSeo
-        title="Liquidity Position"
-        description="Apestate"
-      />
+      <NextSeo title="Liquidity Position" description="Apestate" />
       <div className="mx-auto w-full max-w-lg text-sm">
         <h3 className="mb-4 text-lg font-medium text-gray-900 dark:text-white sm:mb-6 sm:text-2xl">
           My Liquidity position
@@ -38,7 +35,7 @@ const LiquidityPositionPage: NextPageWithLayout = () => {
               className="flex h-16 w-full cursor-pointer items-center justify-between p-3"
               onClick={() => setIsExpand(!isExpand)}
             >
-              <CurrencySwapIcons from="BTC" to="ETH" />
+              {/* <CurrencySwapIcons from="BTC" to="ETH" /> */}
 
               <span className="flex items-center text-sm text-gray-500 dark:text-gray-300">
                 Manage

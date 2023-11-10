@@ -63,12 +63,12 @@ function BorrowPositionControl({
           contractData[position.landId - 1] &&
           contractData[position.landId - 1].symbol}
       </div>
-      <div>
+      {/* <div>
         {position.tokenValue}{' '}
         {contractData &&
           contractData[position.landId - 1] &&
           contractData[position.landId - 1].symbol}
-      </div>
+      </div> */}
       <div>{position.usdValue * 0.99} USDC</div>
       <div
         className={
@@ -423,10 +423,10 @@ const LiquidityPage: NextPageWithLayout = () => {
 
           <div
             className="mt-4 grid gap-y-1"
-            style={{ gridTemplateColumns: 'auto auto auto 64px' }}
+            style={{ gridTemplateColumns: 'auto auto 64px' }}
           >
             <div className="font-bold">AMOUNT</div>
-            <div className="font-bold">BALANCE</div>
+            {/* <div className="font-bold">BALANCE</div> */}
             <div className="font-bold">VALUE</div>
             <div>&nbsp;</div>
 

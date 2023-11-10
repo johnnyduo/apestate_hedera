@@ -23,6 +23,57 @@ import LeverageBox from '@/components/ui/leverage-box';
 
 const EXCHANGE_FEE = 30.1 / 10000;
 
+interface LongPosition {
+  landId: number;
+  usdValue: number;
+  tokenValue: number;
+}
+
+function LongPositionControl({
+  position,
+  onRedeem,
+}: {
+  position: LongPosition;
+  onRedeem: () => void;
+}) {
+  const contractData = useContractData();
+
+  const [executing, setExecuting] = useState(false);
+
+  const redeem = useCallback(async () => {
+    try {
+      setExecuting(true);
+      await executeSell(position.landId, position.tokenValue);
+      onRedeem();
+    } catch (err) {
+      console.error(err);
+      window.alert('REDEEM ERROR');
+    } finally {
+      setExecuting(false);
+    }
+  }, [position]);
+
+  return (
+    <>
+      <div>
+        {position.tokenValue}{' '}
+        {contractData &&
+          contractData[position.landId - 1] &&
+          contractData[position.landId - 1].symbol}
+      </div>
+      <div>{position.usdValue * 0.99} USDC</div>
+      <div
+        className={
+          'underline hover:cursor-pointer ' + (executing ? 'opacity-60' : '')
+        }
+        onClick={() => !executing && redeem()}
+      >
+        Close
+      </div>
+    </>
+  );
+}
+
 const SwapPage: NextPageWithLayout = () => {
   let [toggleCoin, setToggleCoin] = useState(false);
 
@@ -108,6 +159,42 @@ const SwapPage: NextPageWithLayout = () => {
   useEffect(() => {
     fetchPrice();
   }, [contractData]);
+
+  const [longPositions, setLongPositions] = useState<LongPosition[]>([]);
+
+  const refreshLongPositions = useCallback(() => {
+    const positions: LongPosition[] = JSON.parse(
+      window.localStorage.getItem(`APESTATE_LONG_${address}`) || '[]'
+    );
+    setLongPositions(positions);
+    return positions;
+  }, [setLongPositions]);
+
+  const addLongPositions = useCallback(
+    (position: LongPosition) => {
+      const positions = refreshLongPositions();
+      positions.push(position);
+      window.localStorage.setItem(
+        `APESTATE_LONG_${address}`,
+        JSON.stringify(positions)
+      );
+      refreshLongPositions();
+    },
+    [refreshLongPositions]
+  );
+
+  const removeLongPositions = useCallback(
+    (i: number) => {
+      const positions = refreshLongPositions();
+      positions.splice(i, 1);
+      window.localStorage.setItem(
+        `APESTATE_LONG_${address}`,
+        JSON.stringify(positions)
+      );
+      refreshLongPositions();
+    },
+    [refreshLongPositions]
+  );
 
   return (
     <>
@@ -252,6 +339,12 @@ const SwapPage: NextPageWithLayout = () => {
                   await executeBuy(landId, usdValue);
                 }
 
+                addLongPositions({
+                  landId,
+                  tokenValue,
+                  usdValue,
+                });
+
                 setUsdValue(0);
                 setTokenValue(0);
                 setApproved(false);
@@ -267,6 +360,28 @@ const SwapPage: NextPageWithLayout = () => {
             {toggleCoin ? 'SELL' : 'BUY'}
           </Button>
         )}
+
+        <div className="mt-8">
+          <div className="text-center text-lg">Positions</div>
+
+          <div
+            className="mt-4 grid gap-y-1"
+            style={{ gridTemplateColumns: 'auto auto 64px' }}
+          >
+            <div className="font-bold">AMOUNT</div>
+            {/* <div className="font-bold">BALANCE</div> */}
+            <div className="font-bold">VALUE</div>
+            <div>&nbsp;</div>
+
+            {longPositions.map((position, i) => (
+              <LongPositionControl
+                position={position}
+                onRedeem={() => removeLongPositions(i)}
+                key={i}
+              ></LongPositionControl>
+            ))}
+          </div>
+        </div>
       </Trade>
     </>
   );
