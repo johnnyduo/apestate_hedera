@@ -29,7 +29,7 @@ interface BorrowPosition {
   tokenValue: number;
 }
 
-const BORROW_RATIO = 0.799;
+const BORROW_RATIO = 0.999;
 
 function BorrowPositionControl({
   position,
