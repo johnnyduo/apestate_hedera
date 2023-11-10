@@ -76,7 +76,7 @@ function BorrowPositionControl({
         }
         onClick={() => !executing && redeem()}
       >
-        Redeem
+        Close
       </div>
     </>
   );
@@ -249,8 +249,8 @@ const LiquidityPage: NextPageWithLayout = () => {
                 : undefined
             }
           />
-          <TransactionInfo label={'Borrow Ratio'} value={'80%'} />
-          <TransactionInfo label={'Borrow Interest'} value={'1%'} />
+          {/* <TransactionInfo label={'Borrow Ratio'} value={'80%'} /> */}
+          <TransactionInfo label={'Funding Rate'} value={'1%'} />
         </div>
 
         <div className="mt-4">
@@ -311,8 +311,8 @@ const LiquidityPage: NextPageWithLayout = () => {
             </Button>
           </div>
         ) : (
-          <div className="mt-6 grid grid-cols-2 gap-2.5 xs:mt-8">
-            <Button
+          <div className="mt-6 grid gap-2.5 xs:mt-8">
+            {/* <Button
               size="large"
               shape="rounded"
               fullWidth={true}
@@ -362,7 +362,7 @@ const LiquidityPage: NextPageWithLayout = () => {
               }}
             >
               BORROW
-            </Button>
+            </Button> */}
 
             <Button
               size="large"
@@ -419,7 +419,7 @@ const LiquidityPage: NextPageWithLayout = () => {
         )}
 
         <div className="mt-8">
-          <div className="text-center text-lg">Redeem</div>
+          <div className="text-center text-lg">Positions</div>
 
           <div
             className="mt-4 grid gap-y-1"

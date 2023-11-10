@@ -21,12 +21,12 @@ export const menuItems = [
     href: routes.search,
   },
   {
-    name: 'Buy / Sell',
+    name: 'Long',
     icon: <ExchangeIcon />,
     href: routes.swap,
   },
   {
-    name: 'Borrow / Short',
+    name: 'Short',
     icon: <PoolIcon />,
     href: routes.liquidity,
   },

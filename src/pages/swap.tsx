@@ -173,7 +173,7 @@ const SwapPage: NextPageWithLayout = () => {
                 : undefined
             }
           />
-          <TransactionInfo label={'Exchange Fee'} value={'0.25%'} />
+          <TransactionInfo label={'Funding Rate'} value={'0.25%'} />
         </div>
 
         <div className="mt-4">

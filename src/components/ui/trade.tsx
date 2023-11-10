@@ -17,11 +17,11 @@ const Listbox = dynamic(() => import('@/components/ui/list-box'));
 
 const tradeMenu = [
   {
-    name: 'Buy / Sell',
+    name: 'Long',
     value: routes.swap,
   },
   {
-    name: 'Borrow / Short',
+    name: 'Short',
     value: routes.liquidity,
   },
 ];
