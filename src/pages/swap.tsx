@@ -11,8 +11,9 @@ import RootLayout from '@/layouts/_root-layout';
 import useContractData from '@/lib/hooks/use-contract-data';
 import { ethers } from 'ethers';
 import {
-  THBUSD,
+  THBETH,
   executeBuy,
+  executeDraw,
   executeSell,
   fetchUsdcBalance,
   refreshOraclePrice,
@@ -82,8 +83,10 @@ const SwapPage: NextPageWithLayout = () => {
   const { address } = useContext(WalletContext);
 
   const [usdValue, setUsdValue] = useState(0);
+  const [usdValueText, setUsdValueText] = useState('0');
   const [usdBalance, setUsdBalance] = useState(0);
   const [tokenValue, setTokenValue] = useState(0);
+  const [tokenValueText, setTokenValueText] = useState('0');
   const [tokenSymbol, setTokenSymbol] = useState('PYT');
   const [tokenBalance, setTokenBalance] = useState(0);
 
@@ -91,7 +94,8 @@ const SwapPage: NextPageWithLayout = () => {
   const [price, setPrice] = useState(0);
   const [priceUpdatedAt, setPriceUpdatedAt] = useState(0);
 
-  const [approved, setApproved] = useState(false);
+  const approved = true;
+  const [_approved, setApproved] = useState(false);
   const [executing, setExecuting] = useState(false);
 
   const refreshUsdcBalance = useCallback(async () => {
@@ -101,8 +105,9 @@ const SwapPage: NextPageWithLayout = () => {
 
   const fetchPrice = useCallback(() => {
     const data = contractData.find((x) => x.symbol == tokenSymbol);
+    console.log(data);
     const parsedPrice =
-      parseFloat(ethers.utils.formatEther(data?.price || '0')) * THBUSD;
+      parseFloat(ethers.utils.formatEther(data?.price || '0')) * THBETH;
 
     setLandId(data?.landId || 0);
     setPrice(parsedPrice);
@@ -128,6 +133,7 @@ const SwapPage: NextPageWithLayout = () => {
       }
 
       setTokenValue(parseFloat(newTokenValue.toFixed(4)));
+      setTokenValueText(newTokenValue.toFixed(4));
       setApproved(false);
     },
     [fetchPrice, setTokenValue]
@@ -147,6 +153,7 @@ const SwapPage: NextPageWithLayout = () => {
       }
 
       setUsdValue(parseFloat(newUsdValue.toFixed(4)));
+      setUsdValueText(newUsdValue.toFixed(4));
       setApproved(false);
     },
     [fetchPrice, setUsdValue]
@@ -216,9 +223,10 @@ const SwapPage: NextPageWithLayout = () => {
               balance={usdBalance.toFixed(2)}
               defaultCoinIndex={0}
               isUSD={true}
-              value={usdValue}
+              value={usdValueText}
               getCoinValue={(data) => {
                 setUsdValue(parseFloat(data.value || '0'));
+                setUsdValueText(data.value);
                 if (data.value) {
                   onUSDChange(parseFloat(data.value || '0'));
                 }
@@ -242,6 +250,7 @@ const SwapPage: NextPageWithLayout = () => {
               value={tokenValue}
               getCoinValue={(data) => {
                 setTokenValue(parseFloat(data.value || '0'));
+                setTokenValueText(data.value);
                 setTokenSymbol(data.coin);
 
                 if (data.value) {
@@ -254,7 +263,7 @@ const SwapPage: NextPageWithLayout = () => {
         <div className="flex flex-col gap-4 xs:gap-[18px]">
           <TransactionInfo
             label={'Exchange Rate'}
-            value={`${price.toFixed(2)} USD/m²`}
+            value={`${price.toFixed(4)} ETH/m²`}
           />
           <TransactionInfo
             label={'Updated At'}
@@ -384,6 +393,15 @@ const SwapPage: NextPageWithLayout = () => {
                 key={i}
               ></LongPositionControl>
             ))}
+          </div>
+        </div>
+
+        <div className="mt-8">
+          <div className="text-center text-lg">Draw Free {tokenSymbol}</div>
+          <div className="text-center">Diamond tier: 10 draws/day</div>
+
+          <div className="mt-3 text-center">
+            <Button onClick={() => executeDraw(landId)}>Draw</Button>
           </div>
         </div>
       </Trade>

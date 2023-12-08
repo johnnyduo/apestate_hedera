@@ -29,7 +29,7 @@ import {
 } from '@/data/static/price-history';
 import useContractData from '@/lib/hooks/use-contract-data';
 import { ethers } from 'ethers';
-import { THBUSD } from '@/lib/contract';
+import { THBETH } from '@/lib/contract';
 
 function CustomAxis({ x, y, payload }: any) {
   return (
@@ -104,7 +104,7 @@ export default function ComparisonChart() {
   useEffect(() => {
     if (contractData[0]) {
       setPrice(
-        parseFloat(ethers.utils.formatEther(contractData[0].price)) * THBUSD
+        parseFloat(ethers.utils.formatEther(contractData[0].price)) * THBETH
       );
       setDate(contractData[0].lastUpdatedAt);
     }

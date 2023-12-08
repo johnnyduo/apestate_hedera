@@ -3,56 +3,42 @@
     "inputs": [
       {
         "internalType": "address",
-        "name": "_chainlinkToken",
+        "name": "_router",
         "type": "address"
       },
       {
-        "internalType": "address",
-        "name": "_chainlinkOracle",
-        "type": "address"
+        "internalType": "bytes32",
+        "name": "_donID",
+        "type": "bytes32"
+      },
+      {
+        "internalType": "uint64",
+        "name": "_subscriptionId",
+        "type": "uint64"
       }
     ],
     "stateMutability": "nonpayable",
     "type": "constructor"
   },
   {
-    "anonymous": false,
-    "inputs": [
-      {
-        "indexed": true,
-        "internalType": "bytes32",
-        "name": "id",
-        "type": "bytes32"
-      }
-    ],
-    "name": "ChainlinkCancelled",
-    "type": "event"
+    "inputs": [],
+    "name": "EmptyArgs",
+    "type": "error"
   },
   {
-    "anonymous": false,
-    "inputs": [
-      {
-        "indexed": true,
-        "internalType": "bytes32",
-        "name": "id",
-        "type": "bytes32"
-      }
-    ],
-    "name": "ChainlinkFulfilled",
-    "type": "event"
+    "inputs": [],
+    "name": "EmptySource",
+    "type": "error"
   },
   {
-    "anonymous": false,
-    "inputs": [
-      {
-        "indexed": true,
-        "internalType": "bytes32",
-        "name": "id",
-        "type": "bytes32"
-      }
-    ],
-    "name": "ChainlinkRequested",
-    "type": "event"
+    "inputs": [],
+    "name": "NoInlineSecrets",
+    "type": "error"
+  },
+  {
+    "inputs": [],
+    "name": "OnlyRouterCanFulfill",
+    "type": "error"
   },
   {
     "anonymous": false,
@@ -98,6 +84,19 @@
       {
         "indexed": true,
         "internalType": "bytes32",
+        "name": "id",
+        "type": "bytes32"
+      }
+    ],
+    "name": "RequestFulfilled",
+    "type": "event"
+  },
+  {
+    "anonymous": false,
+    "inputs": [
+      {
+        "indexed": true,
+        "internalType": "bytes32",
         "name": "requestId",
         "type": "bytes32"
       },
@@ -118,6 +117,19 @@
     "type": "event"
   },
   {
+    "anonymous": false,
+    "inputs": [
+      {
+        "indexed": true,
+        "internalType": "bytes32",
+        "name": "id",
+        "type": "bytes32"
+      }
+    ],
+    "name": "RequestSent",
+    "type": "event"
+  },
+  {
     "inputs": [],
     "name": "acceptOwnership",
     "outputs": [],
@@ -125,19 +137,37 @@
     "type": "function"
   },
   {
+    "inputs": [],
+    "name": "donID",
+    "outputs": [
+      {
+        "internalType": "bytes32",
+        "name": "",
+        "type": "bytes32"
+      }
+    ],
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
     "inputs": [
       {
         "internalType": "bytes32",
-        "name": "_requestId",
+        "name": "requestId",
         "type": "bytes32"
       },
       {
-        "internalType": "uint256",
-        "name": "_price",
-        "type": "uint256"
+        "internalType": "bytes",
+        "name": "response",
+        "type": "bytes"
+      },
+      {
+        "internalType": "bytes",
+        "name": "err",
+        "type": "bytes"
       }
     ],
-    "name": "fulfill",
+    "name": "handleOracleFulfillment",
     "outputs": [],
     "stateMutability": "nonpayable",
     "type": "function"
@@ -233,19 +263,49 @@
   {
     "inputs": [
       {
+        "internalType": "string",
+        "name": "_str",
+        "type": "string"
+      }
+    ],
+    "name": "strToUint",
+    "outputs": [
+      {
+        "internalType": "uint256",
+        "name": "res",
+        "type": "uint256"
+      },
+      {
+        "internalType": "bool",
+        "name": "err",
+        "type": "bool"
+      }
+    ],
+    "stateMutability": "pure",
+    "type": "function"
+  },
+  {
+    "inputs": [],
+    "name": "subscriptionId",
+    "outputs": [
+      {
+        "internalType": "uint64",
+        "name": "",
+        "type": "uint64"
+      }
+    ],
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      {
         "internalType": "address",
         "name": "to",
         "type": "address"
       }
     ],
     "name": "transferOwnership",
-    "outputs": [],
-    "stateMutability": "nonpayable",
-    "type": "function"
-  },
-  {
-    "inputs": [],
-    "name": "withdrawLink",
     "outputs": [],
     "stateMutability": "nonpayable",
     "type": "function"

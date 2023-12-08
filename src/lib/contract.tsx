@@ -14,7 +14,7 @@ import ExchangeABI from './abis/LandPriceExchange.json';
 import { WalletContext } from './hooks/use-connect';
 import { useInterval } from 'usehooks-ts';
 
-export const THBUSD = 0.028;
+export let THBETH = 0.000012;
 
 export interface ContractData {
   landId: number;
@@ -161,9 +161,9 @@ async function getSigner(ignoreAddress: boolean = false) {
 
   const chainId = await signer.getChainId();
 
-  if (chainId != 97) {
-    window.alert('Please switch to binance testnet');
-    throw new Error('Please switch to binance testnet');
+  if (chainId != 11155111 && chainId != 80001) {
+    window.alert('Please switch to sepolia testnet');
+    throw new Error('Please switch to sepolia testnet');
   }
 
   return signer;
@@ -236,7 +236,9 @@ export async function executeBuy(landId: number, usdAmount: string | number) {
   );
 
   return await (
-    await Exchange.buy(landId, ethers.utils.parseEther(usdAmount.toString()))
+    await Exchange.buy(landId, {
+      value: ethers.utils.parseEther(usdAmount.toString()),
+    })
   ).wait();
 }
 
@@ -269,8 +271,9 @@ export async function executeBorrow(
   return await (
     await Exchange.borrow(
       landId,
-      ethers.utils.parseEther(usdAmount.toString()),
-      ethers.utils.parseEther(shareAmount.toString())
+      // ethers.utils.parseEther(usdAmount.toString()),
+      ethers.utils.parseEther(shareAmount.toString()),
+      { value: ethers.utils.parseEther(usdAmount.toString()) }
     )
   ).wait();
 }
@@ -289,13 +292,34 @@ export async function executeShort(
   return await (
     await Exchange.borrowAndSell(
       landId,
-      ethers.utils.parseEther(usdAmount.toString()),
-      ethers.utils.parseEther(shareAmount.toString())
+      // ethers.utils.parseEther(usdAmount.toString()),
+      ethers.utils.parseEther(shareAmount.toString()),
+      { value: ethers.utils.parseEther(usdAmount.toString()) }
     )
   ).wait();
 }
 
 export async function executeRedeem(positionId: number) {
+  const Exchange = new ethers.Contract(
+    process.env.NEXT_PUBLIC_EXCHANGE_CONTRACT!,
+    ExchangeABI,
+    await getSigner()
+  );
+
+  return await (await Exchange.redeem(positionId)).wait();
+}
+
+export async function executeDraw(landId: number) {
+  const Exchange = new ethers.Contract(
+    process.env.NEXT_PUBLIC_EXCHANGE_CONTRACT!,
+    ExchangeABI,
+    await getSigner()
+  );
+
+  return await (await Exchange.drawLand(landId)).wait();
+}
+
+export async function executeBridge(positionId: number) {
   const Exchange = new ethers.Contract(
     process.env.NEXT_PUBLIC_EXCHANGE_CONTRACT!,
     ExchangeABI,

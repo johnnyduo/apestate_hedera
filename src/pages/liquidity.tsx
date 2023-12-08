@@ -13,7 +13,7 @@ import {
   executeShort,
   fetchUsdcBalance,
   refreshOraclePrice,
-  THBUSD,
+  THBETH,
   usdcApprove,
 } from '@/lib/contract';
 import useContractData from '@/lib/hooks/use-contract-data';
@@ -110,7 +110,7 @@ const LiquidityPage: NextPageWithLayout = () => {
   const fetchPrice = useCallback(() => {
     const data = contractData.find((x) => x.symbol == tokenSymbol);
     const parsedPrice =
-      parseFloat(ethers.utils.formatEther(data?.price || '0')) * THBUSD;
+      parseFloat(ethers.utils.formatEther(data?.price || '0')) * THBETH;
 
     setLandId(data?.landId || 0);
     setPrice(parsedPrice);
@@ -239,7 +239,7 @@ const LiquidityPage: NextPageWithLayout = () => {
         <div className="flex flex-col gap-4 xs:gap-[18px]">
           <TransactionInfo
             label={'Exchange Rate'}
-            value={`${price.toFixed(2)} USD/m²`}
+            value={`${price.toFixed(4)} ETH/m²`}
           />
           <TransactionInfo
             label={'Updated At'}
