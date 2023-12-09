@@ -131,7 +131,7 @@ export default function ComparisonChart() {
                   toggleCoin ? 'flex-row-reverse' : 'flex-row'
                 )}
               >
-                <span>PYT</span>/<span>USDC</span>
+                <span>PYT</span>/<span>ETH</span>
               </span>
               <Button
                 size="mini"
@@ -147,7 +147,7 @@ export default function ComparisonChart() {
           </div>
           <div className="mt-5 flex items-end gap-3 text-base font-medium text-gray-900 dark:text-white sm:text-xl lg:flex-wrap 2xl:flex-nowrap">
             <span className="text-2xl font-semibold xl:text-4xl">
-              {toggleCoin ? (1 / price).toPrecision(4) : price}
+              {toggleCoin ? (1 / price).toPrecision(4) : price.toFixed(4)}
             </span>
             <span
               className={cn(
@@ -155,7 +155,7 @@ export default function ComparisonChart() {
                 toggleCoin ? 'flex-row-reverse' : 'flex-row'
               )}
             >
-              <span>USD</span>/
+              <span>ETH</span>/
               <span>
                 m<sup>2</sup>
               </span>
