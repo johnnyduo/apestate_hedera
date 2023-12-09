@@ -61,7 +61,7 @@ export default function OverviewChart({ chartWrapperClass }: Props) {
         35.79 THB/USD
       </h3>
       <p className="mt-2 mb-1 text-xs font-medium text-gray-400 sm:text-sm">
-        Last week: 35.43 THB/USD <br />(Band Oracle)
+        Last week: 35.43 THB/USD
       </p>
       <div className={cn('h-60 w-full', chartWrapperClass)}>
         <ResponsiveContainer width="100%" height="100%">

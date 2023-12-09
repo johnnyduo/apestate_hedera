@@ -21,6 +21,10 @@ const tradeMenu = [
     value: routes.swap,
   },
   {
+    name: 'Bridge',
+    value: routes.bridge,
+  },
+  {
     name: 'Short',
     value: routes.liquidity,
   },

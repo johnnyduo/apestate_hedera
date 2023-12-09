@@ -319,12 +319,29 @@ export async function executeDraw(landId: number) {
   return await (await Exchange.drawLand(landId)).wait();
 }
 
-export async function executeBridge(positionId: number) {
+export async function executeBridge(landId: number, amount: number) {
+  const signer = await getSigner();
+
   const Exchange = new ethers.Contract(
     process.env.NEXT_PUBLIC_EXCHANGE_CONTRACT!,
     ExchangeABI,
-    await getSigner()
+    signer
   );
 
-  return await (await Exchange.redeem(positionId)).wait();
+  const chainId = await signer.getChainId();
+  let destinationChainSelector;
+
+  if (chainId == 11155111) {
+    destinationChainSelector = '12532609583862916517';
+  } else if (chainId == 80001) {
+    destinationChainSelector = '16015286601757825753';
+  }
+
+  return await (
+    await Exchange.bridge(
+      destinationChainSelector,
+      landId,
+      ethers.utils.parseEther(amount.toString())
+    )
+  ).wait();
 }
