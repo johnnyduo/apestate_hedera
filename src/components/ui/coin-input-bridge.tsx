@@ -18,7 +18,7 @@ interface CoinInputTypes extends React.InputHTMLAttributes<HTMLInputElement> {
   defaultCoinIndex?: number;
   className?: string;
   isUSD?: boolean;
-  icon: string;
+  icon: any;
   symbol: string;
   getCoinValue: (param: { coin: string; value: string }) => void;
 }

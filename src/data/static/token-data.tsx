@@ -54,32 +54,32 @@ export const TopTokensData = [
 export const TopPoolsData = [
   {
     from: 'PYT',
-    to: 'USDC',
+    to: 'ETH',
     volume: '434.2M',
   },
   {
     from: 'TLR',
-    to: 'USDC',
+    to: 'ETH',
     volume: '356.4M',
   },
   {
     from: 'LPO',
-    to: 'USDC',
+    to: 'ETH',
     volume: '295.6M',
   },
   {
     from: 'TLR',
-    to: 'USDC',
+    to: 'ETH',
     volume: '402.5M',
   },
   {
     from: 'BKP',
-    to: 'USDC',
+    to: 'ETH',
     volume: '590.2M',
   },
   {
     from: 'PYT',
-    to: 'USDC',
+    to: 'ETH',
     volume: '104.6M',
   },
 ];

@@ -85,19 +85,24 @@ function BorrowPositionControl({
 const LiquidityPage: NextPageWithLayout = () => {
   const contractData = useContractData();
 
-  const { address } = useContext(WalletContext);
+  const { address, balance } = useContext(WalletContext);
 
   const [usdValue, setUsdValue] = useState(0);
+  const [usdValueText, setUsdValueText] = useState('0');
   const [usdBalance, setUsdBalance] = useState(0);
   const [tokenValue, setTokenValue] = useState(0);
+  const [tokenValueText, setTokenValueText] = useState('0');
   const [tokenSymbol, setTokenSymbol] = useState('PYT');
   const [tokenBalance, setTokenBalance] = useState(0);
+  const [_bypassUpdateRate, setBypassUpdateRate] = useState(false);
+  const bypassUpdateRate = false;
 
   const [landId, setLandId] = useState(0);
   const [price, setPrice] = useState(0);
   const [priceUpdatedAt, setPriceUpdatedAt] = useState(0);
 
-  const [approved, setApproved] = useState(false);
+  const approved = true;
+  const [_approved, setApproved] = useState(false);
   const [executing, setExecuting] = useState(false);
 
   const [borrowPositions, setBorrowPositions] = useState<BorrowPosition[]>([]);
@@ -130,6 +135,7 @@ const LiquidityPage: NextPageWithLayout = () => {
       let newTokenValue = (usdValue / price) * BORROW_RATIO;
 
       setTokenValue(parseFloat(newTokenValue.toFixed(4)));
+      setTokenValueText(newTokenValue.toFixed(4));
       setApproved(false);
     },
     [fetchPrice, setTokenValue]
@@ -143,6 +149,7 @@ const LiquidityPage: NextPageWithLayout = () => {
       let newUsdValue = (tokenValue * price) / BORROW_RATIO;
 
       setUsdValue(parseFloat(newUsdValue.toFixed(4)));
+      setUsdValueText(newUsdValue.toFixed(4));
       setApproved(false);
     },
     [fetchPrice, setUsdValue]
@@ -184,6 +191,7 @@ const LiquidityPage: NextPageWithLayout = () => {
 
   useEffect(() => {
     onTokenChange(tokenValue);
+    setBypassUpdateRate(false);
   }, [tokenSymbol]);
 
   useEffect(() => {
@@ -199,12 +207,13 @@ const LiquidityPage: NextPageWithLayout = () => {
           <div className="relative flex flex-col gap-3">
             <CoinInput
               label={'From'}
-              balance={usdBalance.toFixed(2)}
+              balance={parseFloat(balance || '0').toFixed(4)}
               defaultCoinIndex={0}
               isUSD={true}
-              value={usdValue}
+              value={usdValueText}
               getCoinValue={(data) => {
                 setUsdValue(parseFloat(data.value || '0'));
+                setUsdValueText(data.value);
                 if (data.value) {
                   onUSDChange(parseFloat(data.value || '0'));
                 }
@@ -224,9 +233,10 @@ const LiquidityPage: NextPageWithLayout = () => {
               label={'To'}
               balance={tokenBalance.toFixed(4)}
               defaultCoinIndex={0}
-              value={tokenValue}
+              value={tokenValueText}
               getCoinValue={(data) => {
                 setTokenValue(parseFloat(data.value || '0'));
+                setTokenValueText(data.value);
                 setTokenSymbol(data.coin);
 
                 if (data.value) {
@@ -257,7 +267,8 @@ const LiquidityPage: NextPageWithLayout = () => {
           <LeverageBox />
         </div>
 
-        {priceUpdatedAt * 1000 < Date.now() - 3600 * 1000 ? (
+        {!bypassUpdateRate &&
+        priceUpdatedAt * 1000 < Date.now() - 3600 * 1000 ? (
           <Button
             size="large"
             shape="rounded"
@@ -272,6 +283,7 @@ const LiquidityPage: NextPageWithLayout = () => {
               try {
                 setExecuting(true);
                 await refreshOraclePrice(landId);
+                setBypassUpdateRate(true);
               } catch (err) {
                 console.error(err);
                 window.alert('UPDATE RATE ERROR');

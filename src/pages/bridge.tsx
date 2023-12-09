@@ -32,6 +32,10 @@ import LeverageBox from '@/components/ui/leverage-box';
 import CoinSelectView from '@/components/ui/coin-select-view';
 import { AnimatePresence, motion } from 'framer-motion';
 import { coinList } from '@/data/static/coin-list';
+import CoinInputBridge from '@/components/ui/coin-input-bridge';
+
+import { Ethereum } from '@/components/icons/ethereum';
+import { Polygon } from '@/components/icons/polygon';
 
 const EXCHANGE_FEE = 30.1 / 10000;
 
@@ -100,6 +104,7 @@ const BridgePage: NextPageWithLayout = () => {
   const [tokenValueText, setTokenValueText] = useState('0');
   const [tokenSymbol, setTokenSymbol] = useState('PYT');
   const [tokenBalance, setTokenBalance] = useState(0);
+  const [polygonTokenBalance, setPolygonTokenBalance] = useState(0);
 
   const [landId, setLandId] = useState(0);
   const [price, setPrice] = useState(0);
@@ -127,6 +132,9 @@ const BridgePage: NextPageWithLayout = () => {
     setPrice(parsedPrice);
     setPriceUpdatedAt(data?.lastUpdatedAt || 0);
     setTokenBalance(parseFloat(ethers.utils.formatEther(data?.balance || '0')));
+    setPolygonTokenBalance(
+      parseFloat(ethers.utils.formatEther(data?.balancePolygon || '0'))
+    );
 
     refreshUsdcBalance().catch((err) => console.error(err));
 
@@ -233,18 +241,35 @@ const BridgePage: NextPageWithLayout = () => {
       <NextSeo title="Swap" description="Apestate" />
       <Trade>
         <div className="mb-5 border-b border-dashed border-gray-200 pb-5 dark:border-gray-800 xs:mb-7 xs:pb-6">
+          <div className="mb-3 flex gap-2">
+            {coinList.map((coin) => (
+              <div
+                className={`flex items-center gap-2 rounded-2xl border border-gray-700 py-2 px-3 hover:cursor-pointer ${
+                  tokenSymbol == coin.code ? 'bg-brand' : ''
+                }`}
+                key={coin.code}
+                onClick={() => setTokenSymbol(coin.code)}
+              >
+                {coin.icon}
+                {coin.code}
+              </div>
+            ))}
+          </div>
+
           <div
             className={cn(
               'relative flex gap-3',
               toggleCoin ? 'flex-col-reverse' : 'flex-col'
             )}
           >
-            <CoinInput
+            <CoinInputBridge
               label={toggleCoin ? 'To' : 'From'}
-              balance={usdBalance.toFixed(2)}
+              balance={tokenBalance.toFixed(4)}
               defaultCoinIndex={0}
               isUSD={true}
               value={usdValueText}
+              symbol="ETH"
+              icon={<Ethereum></Ethereum>}
               getCoinValue={(data) => {
                 setUsdValue(parseFloat(data.value || '0'));
                 setUsdValueText(data.value);
@@ -264,15 +289,18 @@ const BridgePage: NextPageWithLayout = () => {
                 <SwapIcon className="h-auto w-3" />
               </Button>
             </div>
-            <CoinInput
+            <CoinInputBridge
               label={toggleCoin ? 'From' : 'To'}
-              balance={tokenBalance.toFixed(4)}
+              balance={polygonTokenBalance.toFixed(4)}
               defaultCoinIndex={0}
+              isUSD={true}
               value={tokenValue}
+              symbol="Polygon"
+              icon={<Polygon></Polygon>}
               getCoinValue={(data) => {
                 setTokenValue(parseFloat(data.value || '0'));
                 setTokenValueText(data.value);
-                setTokenSymbol(data.coin);
+                // setTokenSymbol(data.coin);
 
                 if (data.value) {
                   onTokenChange(parseFloat(data.value || '0'));
@@ -297,9 +325,9 @@ const BridgePage: NextPageWithLayout = () => {
           <TransactionInfo label={'Funding Rate'} value={'0.25%'} />
         </div> */}
 
-        <div className="mt-4">
+        {/* <div className="mt-4">
           <LeverageBox />
-        </div>
+        </div> */}
 
         <Button
           size="large"

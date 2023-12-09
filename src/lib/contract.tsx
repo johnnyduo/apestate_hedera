@@ -20,6 +20,7 @@ export interface ContractData {
   landId: number;
   symbol: string;
   balance: string;
+  balancePolygon: string;
   price: string;
   lastUpdatedAt: number;
 }
@@ -31,6 +32,7 @@ const DEFAULT_CONTRACT_DATA: ContractData[] = [
     landId: 1,
     symbol: 'PYT',
     balance: '0',
+    balancePolygon: '0',
     price: '0',
     lastUpdatedAt: 0,
   },
@@ -38,6 +40,7 @@ const DEFAULT_CONTRACT_DATA: ContractData[] = [
     landId: 2,
     symbol: 'TLR',
     balance: '0',
+    balancePolygon: '0',
     price: '0',
     lastUpdatedAt: 0,
   },
@@ -45,6 +48,7 @@ const DEFAULT_CONTRACT_DATA: ContractData[] = [
     landId: 3,
     symbol: 'LPO',
     balance: '0',
+    balancePolygon: '0',
     price: '0',
     lastUpdatedAt: 0,
   },
@@ -52,6 +56,7 @@ const DEFAULT_CONTRACT_DATA: ContractData[] = [
     landId: 4,
     symbol: 'STN',
     balance: '0',
+    balancePolygon: '0',
     price: '0',
     lastUpdatedAt: 0,
   },
@@ -63,6 +68,12 @@ export const ContractDataContext = React.createContext<ContractData[]>(
 
 const provider = MulticallWrapper.wrap(
   new ethers.providers.JsonRpcProvider(process.env.NEXT_PUBLIC_RPC_ENDPOINT)
+);
+
+const polygonProvider = MulticallWrapper.wrap(
+  new ethers.providers.JsonRpcProvider(
+    process.env.NEXT_PUBLIC_RPC_ENDPOINT_POLYGON
+  )
 );
 
 export const FakeUSDC = new ethers.Contract(
@@ -80,6 +91,11 @@ export const Exchange = new ethers.Contract(
   ExchangeABI,
   provider
 );
+export const ExchangePolygon = new ethers.Contract(
+  process.env.NEXT_PUBLIC_EXCHANGE_CONTRACT!,
+  ExchangeABI,
+  polygonProvider
+);
 
 export async function fetchContractData(address: string) {
   const promises = [];
@@ -96,7 +112,16 @@ export async function fetchContractData(address: string) {
     for (let landId = 1; landId <= 4; landId++) {
       promises.push(Exchange.balanceOf(address, landId));
     }
+
+    for (let landId = 1; landId <= 4; landId++) {
+      promises.push(ExchangePolygon.balanceOf(address, landId));
+    }
   } else {
+    promises.push(Promise.resolve('0'));
+    promises.push(Promise.resolve('0'));
+    promises.push(Promise.resolve('0'));
+    promises.push(Promise.resolve('0'));
+
     promises.push(Promise.resolve('0'));
     promises.push(Promise.resolve('0'));
     promises.push(Promise.resolve('0'));
@@ -108,6 +133,7 @@ export async function fetchContractData(address: string) {
   const prices = response.slice(0, 4);
   const updatedAts = response.slice(4, 8);
   const balances = response.slice(8, 12);
+  const balancesPolygon = response.slice(12, 16);
 
   const result: ContractData[] = [];
 
@@ -116,6 +142,7 @@ export async function fetchContractData(address: string) {
       landId: i + 1,
       symbol: SYMBOL_CONTRACT_DATA[i],
       balance: balances[i],
+      balancePolygon: balancesPolygon[i],
       price: prices[i],
       lastUpdatedAt: updatedAts[i],
     });

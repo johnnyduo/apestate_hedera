@@ -80,7 +80,7 @@ const SwapPage: NextPageWithLayout = () => {
 
   const contractData = useContractData();
 
-  const { address } = useContext(WalletContext);
+  const { address, balance } = useContext(WalletContext);
 
   const [usdValue, setUsdValue] = useState(0);
   const [usdValueText, setUsdValueText] = useState('0');
@@ -89,6 +89,8 @@ const SwapPage: NextPageWithLayout = () => {
   const [tokenValueText, setTokenValueText] = useState('0');
   const [tokenSymbol, setTokenSymbol] = useState('PYT');
   const [tokenBalance, setTokenBalance] = useState(0);
+  const [_bypassUpdateRate, setBypassUpdateRate] = useState(false);
+  const bypassUpdateRate = false;
 
   const [landId, setLandId] = useState(0);
   const [price, setPrice] = useState(0);
@@ -161,6 +163,7 @@ const SwapPage: NextPageWithLayout = () => {
 
   useEffect(() => {
     onTokenChange(tokenValue);
+    setBypassUpdateRate(false);
   }, [tokenSymbol]);
 
   useEffect(() => {
@@ -220,7 +223,7 @@ const SwapPage: NextPageWithLayout = () => {
           >
             <CoinInput
               label={toggleCoin ? 'To' : 'From'}
-              balance={usdBalance.toFixed(2)}
+              balance={parseFloat(balance || '0').toFixed(4)}
               defaultCoinIndex={0}
               isUSD={true}
               value={usdValueText}
@@ -247,7 +250,7 @@ const SwapPage: NextPageWithLayout = () => {
               label={toggleCoin ? 'From' : 'To'}
               balance={tokenBalance.toFixed(4)}
               defaultCoinIndex={0}
-              value={tokenValue}
+              value={tokenValueText}
               getCoinValue={(data) => {
                 setTokenValue(parseFloat(data.value || '0'));
                 setTokenValueText(data.value);
@@ -280,7 +283,8 @@ const SwapPage: NextPageWithLayout = () => {
           <LeverageBox />
         </div>
 
-        {priceUpdatedAt * 1000 < Date.now() - 3600 * 1000 ? (
+        {!bypassUpdateRate &&
+        priceUpdatedAt * 1000 < Date.now() - 3600 * 1000 ? (
           <Button
             size="large"
             shape="rounded"
@@ -295,6 +299,7 @@ const SwapPage: NextPageWithLayout = () => {
               try {
                 setExecuting(true);
                 await refreshOraclePrice(landId);
+                setBypassUpdateRate(true);
               } catch (err) {
                 console.error(err);
                 window.alert('UPDATE RATE ERROR');
