@@ -85,12 +85,12 @@ export default function WalletConnect({
           </div>
 
           {/* <ActiveLink href="/create-nft" className={cn(anchorClassName)}> */}
-          <Button
+          {/* <Button
             className={cn('shadow-main hover:shadow-large', btnClassName)}
             onClick={() => usdcFaucet('1000000')}
           >
             FAUCET
-          </Button>
+          </Button> */}
           {/* </ActiveLink> */}
         </div>
       ) : (
