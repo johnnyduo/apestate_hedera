@@ -188,10 +188,10 @@ async function getSigner(ignoreAddress: boolean = false) {
 
   const chainId = await signer.getChainId();
 
-  if (chainId != 11155111 && chainId != 80001) {
-    window.alert('Please switch to sepolia testnet');
-    throw new Error('Please switch to sepolia testnet');
-  }
+  // if (chainId != 11155111 && chainId != 80001) {
+  //   window.alert('Please switch to sepolia testnet');
+  //   throw new Error('Please switch to sepolia testnet');
+  // }
 
   return signer;
 }
