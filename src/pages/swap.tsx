@@ -90,7 +90,7 @@ const SwapPage: NextPageWithLayout = () => {
   const [tokenSymbol, setTokenSymbol] = useState('PYT');
   const [tokenBalance, setTokenBalance] = useState(0);
   const [_bypassUpdateRate, setBypassUpdateRate] = useState(false);
-  const bypassUpdateRate = false;
+  const bypassUpdateRate = true;
 
   const [landId, setLandId] = useState(0);
   const [price, setPrice] = useState(0);
