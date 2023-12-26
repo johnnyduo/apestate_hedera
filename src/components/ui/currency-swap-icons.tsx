@@ -6,15 +6,15 @@ import { Usdc } from '@/components/icons/usdc';
 import { Cardano } from '@/components/icons/cardano';
 import { Doge } from '@/components/icons/doge';
 
-export type CoinList = 'PYT' | 'BKP' | 'TLR' | 'STN' | 'USDC' | 'LPO' | 'THB';
+export type CoinList = 'D1' | 'D2' | 'D3' | 'D4' | 'USDC' | 'D5' | 'THB';
 
 const coinIcons: Record<CoinList, JSX.Element> = {
-  PYT: <Bitcoin />,
-  BKP: <Ethereum />,
-  TLR: <Tether />,
-  STN: <Bnb />,
+  D1: <Bitcoin />,
+  D2: <Ethereum />,
+  D3: <Tether />,
+  D4: <Bnb />,
   USDC: <Usdc />,
-  LPO: <Cardano />,
+  D5: <Cardano />,
   THB: <Doge />,
 };
 
