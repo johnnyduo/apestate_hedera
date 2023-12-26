@@ -1,9 +1,9 @@
 import AuthorImage from '@/assets/images/owner.jpeg';
-import NFT1 from '@/assets/images/nft/DISTRICT-1.jpeg';
-import NFT2 from '@/assets/images/nft/DISTRICT-2.jpeg';
-import NFT3 from '@/assets/images/nft/DISTRICT-3.jpeg';
-import NFT4 from '@/assets/images/nft/DISTRICT-4.jpeg';
-import NFT5 from '@/assets/images/nft/DISTRICT-5.jpeg';
+import NFT1 from '@/assets/images/nft/district-1.jpeg';
+import NFT2 from '@/assets/images/nft/district-2.jpeg';
+import NFT3 from '@/assets/images/nft/district-3.jpeg';
+import NFT4 from '@/assets/images/nft/district-4.jpeg';
+import NFT5 from '@/assets/images/nft/district-5.jpeg';
 
 export const NFTList = [
   {
