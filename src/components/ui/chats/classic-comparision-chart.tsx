@@ -69,7 +69,7 @@ export default function ComparisonChart() {
   const { theme } = useTheme();
   const breakpoint = useBreakpoint();
   const [price, setPrice] = useState(6.2);
-  const [date, setDate] = useState(1624147200);
+  const [date, setDate] = useState(1624179200);
   const [status, setStatus] = useState('Year');
   const [chartData, setChartData] = useState(yearlyComparison);
   const [priceDiff, setPriceDiff] = useState(-1.107);
