@@ -13,7 +13,7 @@ import {
   executeShort,
   fetchUsdcBalance,
   refreshOraclePrice,
-  THBETH,
+  CURREX,
   usdcApprove,
 } from '@/lib/contract';
 import useContractData from '@/lib/hooks/use-contract-data';
@@ -101,8 +101,8 @@ const LiquidityPage: NextPageWithLayout = () => {
   const [price, setPrice] = useState(0);
   const [priceUpdatedAt, setPriceUpdatedAt] = useState(0);
 
-  const approved = true;
-  const [_approved, setApproved] = useState(false);
+  // const approved = true;
+  const [approved, setApproved] = useState(false);
   const [executing, setExecuting] = useState(false);
 
   const [borrowPositions, setBorrowPositions] = useState<BorrowPosition[]>([]);
@@ -115,7 +115,7 @@ const LiquidityPage: NextPageWithLayout = () => {
   const fetchPrice = useCallback(() => {
     const data = contractData.find((x) => x.symbol == tokenSymbol);
     const parsedPrice =
-      parseFloat(ethers.utils.formatEther(data?.price || '0')) * THBETH;
+      parseFloat(ethers.utils.formatEther(data?.price || '0')) * CURREX;
 
     setLandId(data?.landId || 0);
     setPrice(parsedPrice);

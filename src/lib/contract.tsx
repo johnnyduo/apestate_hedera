@@ -14,7 +14,7 @@ import ExchangeABI from './abis/LandPriceExchange.json';
 import { WalletContext } from './hooks/use-connect';
 import { useInterval } from 'usehooks-ts';
 
-export let THBETH = 0.000012;
+export let CURREX = 1;
 
 export interface ContractData {
   landId: number;
@@ -267,10 +267,14 @@ export async function executeBuy(landId: number, usdAmount: string | number) {
     await getSigner()
   );
 
+  // return await (
+  //   await Exchange.buy(landId, {
+  //     value: ethers.utils.parseEther(usdAmount.toString()),
+  //   })
+  // ).wait();
+
   return await (
-    await Exchange.buy(landId, {
-      value: ethers.utils.parseEther(usdAmount.toString()),
-    })
+    await Exchange.buy(landId, ethers.utils.parseEther(usdAmount.toString()))
   ).wait();
 }
 
@@ -303,9 +307,9 @@ export async function executeBorrow(
   return await (
     await Exchange.borrow(
       landId,
-      // ethers.utils.parseEther(usdAmount.toString()),
-      ethers.utils.parseEther(shareAmount.toString()),
-      { value: ethers.utils.parseEther(usdAmount.toString()) }
+      ethers.utils.parseEther(usdAmount.toString()),
+      ethers.utils.parseEther(shareAmount.toString())
+      // { value: ethers.utils.parseEther(usdAmount.toString()) }
     )
   ).wait();
 }
@@ -324,9 +328,9 @@ export async function executeShort(
   return await (
     await Exchange.borrowAndSell(
       landId,
-      // ethers.utils.parseEther(usdAmount.toString()),
-      ethers.utils.parseEther(shareAmount.toString()),
-      { value: ethers.utils.parseEther(usdAmount.toString()) }
+      ethers.utils.parseEther(usdAmount.toString()),
+      ethers.utils.parseEther(shareAmount.toString())
+      // { value: ethers.utils.parseEther(usdAmount.toString()) }
     )
   ).wait();
 }

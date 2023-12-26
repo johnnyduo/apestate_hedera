@@ -11,7 +11,7 @@ import RootLayout from '@/layouts/_root-layout';
 import useContractData from '@/lib/hooks/use-contract-data';
 import { ethers } from 'ethers';
 import {
-  THBETH,
+  CURREX,
   executeBuy,
   executeDraw,
   executeSell,
@@ -96,8 +96,8 @@ const SwapPage: NextPageWithLayout = () => {
   const [price, setPrice] = useState(0);
   const [priceUpdatedAt, setPriceUpdatedAt] = useState(0);
 
-  const approved = true;
-  const [_approved, setApproved] = useState(false);
+  // const approved = true;
+  const [approved, setApproved] = useState(false);
   const [executing, setExecuting] = useState(false);
 
   const refreshUsdcBalance = useCallback(async () => {
@@ -109,7 +109,7 @@ const SwapPage: NextPageWithLayout = () => {
     const data = contractData.find((x) => x.symbol == tokenSymbol);
     console.log(data);
     const parsedPrice =
-      parseFloat(ethers.utils.formatEther(data?.price || '0')) * THBETH;
+      parseFloat(ethers.utils.formatEther(data?.price || '0')) * CURREX;
 
     setLandId(data?.landId || 0);
     setPrice(parsedPrice);
@@ -401,14 +401,14 @@ const SwapPage: NextPageWithLayout = () => {
           </div>
         </div>
 
-        <div className="mt-8">
+        {/* <div className="mt-8">
           <div className="text-center text-lg">Draw Free {tokenSymbol}</div>
           <div className="text-center">Diamond tier: 10 draws/day</div>
 
           <div className="mt-3 text-center">
             <Button onClick={() => executeDraw(landId)}>Draw</Button>
           </div>
-        </div>
+        </div> */}
       </Trade>
     </>
   );

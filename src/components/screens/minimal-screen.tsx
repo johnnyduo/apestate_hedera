@@ -14,7 +14,7 @@ import { useBreakpoint } from '@/lib/hooks/use-breakpoint';
 import AuthorImage from '@/assets/images/owner.jpeg';
 import useContractData from '@/lib/hooks/use-contract-data';
 import { ethers } from 'ethers';
-import { THBETH, fetchUsdcBalance } from '@/lib/contract';
+import { CURREX, fetchUsdcBalance } from '@/lib/contract';
 import { WalletContext } from '@/lib/hooks/use-connect';
 
 const topPoolsLimit = (breakpoint: string) => {
@@ -47,7 +47,7 @@ export default function MinimalScreen() {
           ethers.utils.formatEther(contractData[i].balance)
         ).toFixed(4);
         newPriceFeed[i].usdBalance = (
-          parseFloat(ethers.utils.formatEther(contractData[i].price)) * THBETH
+          parseFloat(ethers.utils.formatEther(contractData[i].price)) * CURREX
         ).toFixed(4);
         newPriceFeed[i].lastUpdatedAt = contractData[i].lastUpdatedAt;
       }
