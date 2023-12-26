@@ -13,8 +13,8 @@ import { Border } from '@/components/icons/border';
 export const priceFeedData = [
   {
     id: '0',
-    name: 'PhayaThai',
-    symbol: 'PYT',
+    name: 'District 1',
+    symbol: 'D1',
     balance: '0',
     usdBalance: '0', //price per square meter
     logo: BitcoinImage,
@@ -37,8 +37,8 @@ export const priceFeedData = [
   },
   {
     id: '1',
-    name: 'Thonglor',
-    symbol: 'TLR',
+    name: 'District 2',
+    symbol: 'D2',
     balance: '0',
     usdBalance: '0',
     logo: TetherImage,
@@ -61,8 +61,8 @@ export const priceFeedData = [
   },
   {
     id: '2',
-    name: 'LatPhrao',
-    symbol: 'LPO',
+    name: 'District 3',
+    symbol: 'D3',
     balance: '0',
     usdBalance: '0',
     logo: CardanoImage,
@@ -85,8 +85,8 @@ export const priceFeedData = [
   },
   {
     id: '3',
-    name: 'Sathon',
-    symbol: 'STN',
+    name: 'District 4',
+    symbol: 'D4',
     balance: '0',
     usdBalance: '0',
     logo: BinanceImage,

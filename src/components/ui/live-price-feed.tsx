@@ -66,7 +66,7 @@ export function LivePriceFeed({
               style={{ width: 'auto' }}
               title={`${usdBalance} USD`}
             >
-              {usdBalance} ETH/M<sup>2</sup>
+              {usdBalance} USD/M<sup>2</sup>
             </span>
             <span
               className={`flex items-center  ${

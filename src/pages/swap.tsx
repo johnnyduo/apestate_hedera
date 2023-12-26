@@ -223,7 +223,7 @@ const SwapPage: NextPageWithLayout = () => {
           >
             <CoinInput
               label={toggleCoin ? 'To' : 'From'}
-              balance={parseFloat(balance || '0').toFixed(4)}
+              balance={usdBalance.toFixed(2)}
               defaultCoinIndex={0}
               isUSD={true}
               value={usdValueText}
@@ -266,7 +266,7 @@ const SwapPage: NextPageWithLayout = () => {
         <div className="flex flex-col gap-4 xs:gap-[18px]">
           <TransactionInfo
             label={'Exchange Rate'}
-            value={`${price.toFixed(4)} ETH/m²`}
+            value={`${price.toFixed(4)} USD/m²`}
           />
           <TransactionInfo
             label={'Updated At'}

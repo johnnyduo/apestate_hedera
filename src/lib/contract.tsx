@@ -25,42 +25,41 @@ export interface ContractData {
   lastUpdatedAt: number;
 }
 
-const SYMBOL_CONTRACT_DATA = ['PYT', 'TLR', 'LPO', 'STN'];
-
-const DEFAULT_CONTRACT_DATA: ContractData[] = [
-  {
-    landId: 1,
-    symbol: 'PYT',
-    balance: '0',
-    balancePolygon: '0',
-    price: '0',
-    lastUpdatedAt: 0,
-  },
-  {
-    landId: 2,
-    symbol: 'TLR',
-    balance: '0',
-    balancePolygon: '0',
-    price: '0',
-    lastUpdatedAt: 0,
-  },
-  {
-    landId: 3,
-    symbol: 'LPO',
-    balance: '0',
-    balancePolygon: '0',
-    price: '0',
-    lastUpdatedAt: 0,
-  },
-  {
-    landId: 4,
-    symbol: 'STN',
-    balance: '0',
-    balancePolygon: '0',
-    price: '0',
-    lastUpdatedAt: 0,
-  },
+const SYMBOL_CONTRACT_DATA = [
+  'D1',
+  'D2',
+  'D3',
+  'D4',
+  'D5',
+  'D6',
+  'D7',
+  'D8',
+  'D9',
+  'D10',
+  'D11',
+  'D12',
+  'BINHC',
+  'CAN',
+  'GO',
+  'HOC',
+  'NHA',
+  'THU',
+  'BINH',
+  'TANP',
+  'TANB',
+  'CU',
 ];
+
+const DEFAULT_CONTRACT_DATA: ContractData[] = SYMBOL_CONTRACT_DATA.map(
+  (symbol) => ({
+    landId: 1,
+    symbol,
+    balance: '0',
+    balancePolygon: '0',
+    price: '0',
+    lastUpdatedAt: 0,
+  })
+);
 
 export const ContractDataContext = React.createContext<ContractData[]>(
   DEFAULT_CONTRACT_DATA
@@ -101,44 +100,40 @@ export const ExchangePolygon = new ethers.Contract(
   polygonProvider
 );
 
+const TOKEN_LENGTH = 22;
+
 export async function fetchContractData(address: string) {
   const promises = [];
 
-  for (let landId = 1; landId <= 4; landId++) {
+  for (let landId = 1; landId <= TOKEN_LENGTH; landId++) {
     promises.push(Oracle.price(landId));
   }
 
-  for (let landId = 1; landId <= 4; landId++) {
+  for (let landId = 1; landId <= TOKEN_LENGTH; landId++) {
     promises.push(Oracle.latestFulfill(landId));
   }
 
   if (address) {
-    for (let landId = 1; landId <= 4; landId++) {
+    for (let landId = 1; landId <= TOKEN_LENGTH; landId++) {
       promises.push(Exchange.balanceOf(address, landId));
     }
 
-    for (let landId = 1; landId <= 4; landId++) {
+    for (let landId = 1; landId <= TOKEN_LENGTH; landId++) {
       // promises.push(ExchangePolygon.balanceOf(address, landId));
-      promises.push(Promise.resolve(0));
+      promises.push(Promise.resolve('0'));
     }
   } else {
-    promises.push(Promise.resolve('0'));
-    promises.push(Promise.resolve('0'));
-    promises.push(Promise.resolve('0'));
-    promises.push(Promise.resolve('0'));
-
-    promises.push(Promise.resolve('0'));
-    promises.push(Promise.resolve('0'));
-    promises.push(Promise.resolve('0'));
-    promises.push(Promise.resolve('0'));
+    for (let i = 0; i < TOKEN_LENGTH * 2; i++) {
+      promises.push(Promise.resolve('0'));
+    }
   }
 
   const response = await Promise.all(promises);
 
-  const prices = response.slice(0, 4);
-  const updatedAts = response.slice(4, 8);
-  const balances = response.slice(8, 12);
-  const balancesPolygon = response.slice(12, 16);
+  const prices = response.slice(0, TOKEN_LENGTH);
+  const updatedAts = response.slice(TOKEN_LENGTH, TOKEN_LENGTH * 2);
+  const balances = response.slice(TOKEN_LENGTH * 2, TOKEN_LENGTH * 3);
+  const balancesPolygon = response.slice(TOKEN_LENGTH * 3, TOKEN_LENGTH * 4);
 
   const result: ContractData[] = [];
 

@@ -18,7 +18,7 @@ import RootLayout from '@/layouts/_root-layout';
 import useContractData from '@/lib/hooks/use-contract-data';
 import { ethers } from 'ethers';
 import {
-  CURREX,
+  THBUSD,
   executeBridge,
   executeBuy,
   executeDraw,
@@ -126,7 +126,7 @@ const BridgePage: NextPageWithLayout = () => {
     const data = contractData.find((x) => x.symbol == tokenSymbol);
     console.log(data);
     const parsedPrice =
-      parseFloat(ethers.utils.formatEther(data?.price || '0')) * CURREX;
+      parseFloat(ethers.utils.formatEther(data?.price || '0')) * THBUSD;
 
     setLandId(data?.landId || 0);
     setPrice(parsedPrice);

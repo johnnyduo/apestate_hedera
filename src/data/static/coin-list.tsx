@@ -8,8 +8,8 @@ import { Doge } from '@/components/icons/doge';
 
 export const usdCoinList = [
   {
-    icon: <Ethereum />,
-    code: 'ETH',
+    icon: <Usdc />,
+    code: 'USDC',
     name: 'USD Coin',
     price: 1.001,
   },
