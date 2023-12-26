@@ -118,7 +118,8 @@ export async function fetchContractData(address: string) {
     }
 
     for (let landId = 1; landId <= 4; landId++) {
-      promises.push(ExchangePolygon.balanceOf(address, landId));
+      // promises.push(ExchangePolygon.balanceOf(address, landId));
+      promises.push(Promise.resolve(0));
     }
   } else {
     promises.push(Promise.resolve('0'));
