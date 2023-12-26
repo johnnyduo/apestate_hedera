@@ -1,9 +1,9 @@
 import AuthorImage from '@/assets/images/owner.jpeg';
-import NFT1 from '@/assets/images/nft/thonglor-sq.jpg';
-import NFT2 from '@/assets/images/nft/phayathai.jpeg';
-import NFT3 from '@/assets/images/nft/sathorn.jpg';
-import NFT4 from '@/assets/images/nft/bangkapi.jpeg';
-import NFT5 from '@/assets/images/nft/latprao.webp';
+import NFT1 from '@/assets/images/nft/district-1.jpeg';
+import NFT2 from '@/assets/images/nft/district-2.jpeg';
+import NFT3 from '@/assets/images/nft/district-3.jpeg';
+import NFT4 from '@/assets/images/nft/district-4.jpeg';
+import NFT5 from '@/assets/images/nft/district-5.jpeg';
 
 export const NFTList = [
   {
@@ -11,53 +11,53 @@ export const NFTList = [
     author: 'ApeState',
     authorImage: AuthorImage,
     image: NFT1,
-    name: 'Thonglor Land',
-    collection: 'Bangkok, TH',
-    price: '12950 USDC (฿463,480.50)',
+    name: 'District 1',
+    collection: 'HCMC, VN',
+    price: '4000 USDT',
   },
   {
     id: 2,
     author: 'ApeState',
     authorImage: AuthorImage,
     image: NFT2,
-    name: 'Phaya Thai Land',
-    collection: 'Bangkok, TH',
-    price: '4200 USDC (฿150,318.00)',
+    name: 'District 2',
+    collection: 'HCMC, VN',
+    price: '3000 USDT',
   },
   {
     id: 3,
     author: 'ApeState',
     authorImage: AuthorImage,
     image: NFT3,
-    name: 'Sathorn Land',
-    collection: 'Bangkok, TH',
-    price: '2072 USDC (฿74,175.53)',
+    name: 'District 3',
+    collection: 'HCMC, VN',
+    price: '2200 USDT',
   },
   {
     id: 4,
     author: 'ApeState',
     authorImage: AuthorImage,
     image: NFT4,
-    name: 'Bangkapi Land',
-    collection: 'Bangkok, TH',
-    price: '1050 USDC (฿37,588.95)',
+    name: 'District 4',
+    collection: 'HCMC, VN',
+    price: '1600 USDT',
   },
   {
     id: 5,
     author: 'ApeState',
     authorImage: AuthorImage,
     image: NFT2,
-    name: 'Thonglor Land',
-    collection: 'Bangkok, TH',
-    price: '12950 USDC (฿463,480.50)',
+    name: 'District 2',
+    collection: 'HCMC, VN',
+    price: '3000 USDT',
   },
   {
     id: 6,
     author: 'ApeState',
     authorImage: AuthorImage,
     image: NFT5,
-    name: 'Lat Prao Land',
-    collection: 'Bangkok, TH',
-    price: '1260 USDC (฿45,106.74)',
+    name: 'District 5',
+    collection: 'HCMC, VN',
+    price: '1400 USDT',
   },
 ];

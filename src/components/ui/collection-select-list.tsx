@@ -10,27 +10,27 @@ import CollectionImage4 from '@/assets/images/collection/collection-4.jpg';
 export const collectionList = [
   {
     icon: CollectionImage1,
-    name: 'PhayaThai',
+    name: 'District 1',
     value: 'iron-flower',
   },
   {
     icon: CollectionImage2,
-    name: 'Thonglor',
+    name: 'District 2',
     value: 'creative-web',
   },
   {
     icon: CollectionImage3,
-    name: 'LatPhrao',
+    name: 'District 3',
     value: 'art-in-binary',
   },
   {
     icon: CollectionImage4,
-    name: 'Bangkapi',
+    name: 'District 4',
     value: 'sound-of-wave',
   },
   {
     icon: CollectionImage2,
-    name: 'Sathon',
+    name: 'District 2',
     value: 'pixel-art',
   },
 ];

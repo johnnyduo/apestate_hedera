@@ -195,7 +195,7 @@ export function Filters() {
       <Collapse label="Status" initialOpen>
         <Status />
       </Collapse>
-      <Collapse label="Price Range (USDC)" initialOpen>
+      <Collapse label="Price Range (USDT)" initialOpen>
         <PriceRange />
       </Collapse>
       <Collapse label="Collection" initialOpen>
