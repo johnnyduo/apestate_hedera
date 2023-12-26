@@ -66,8 +66,12 @@ export const ContractDataContext = React.createContext<ContractData[]>(
   DEFAULT_CONTRACT_DATA
 );
 
-const provider = MulticallWrapper.wrap(
-  new ethers.providers.JsonRpcProvider(process.env.NEXT_PUBLIC_RPC_ENDPOINT)
+// const provider = MulticallWrapper.wrap(
+//   new ethers.providers.JsonRpcProvider(process.env.NEXT_PUBLIC_RPC_ENDPOINT)
+// );
+
+const provider = new ethers.providers.JsonRpcProvider(
+  process.env.NEXT_PUBLIC_RPC_ENDPOINT
 );
 
 const polygonProvider = MulticallWrapper.wrap(

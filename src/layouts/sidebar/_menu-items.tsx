@@ -30,9 +30,9 @@ export const menuItems = [
     icon: <PoolIcon />,
     href: routes.liquidity,
   },
-  {
-    name: 'Bridge',
-    icon: <DiskIcon />,
-    href: routes.bridge,
-  },
+  // {
+  //   name: 'Bridge',
+  //   icon: <DiskIcon />,
+  //   href: routes.bridge,
+  // },
 ];
