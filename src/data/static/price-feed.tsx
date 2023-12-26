@@ -13,7 +13,7 @@ import { Border } from '@/components/icons/border';
 export const priceFeedData = [
   {
     id: '0',
-    name: 'District 1',
+    name: 'DISTRICT1',
     symbol: 'D1',
     balance: '0',
     usdBalance: '0', //price per square meter
@@ -37,7 +37,7 @@ export const priceFeedData = [
   },
   {
     id: '1',
-    name: 'District 2',
+    name: 'DISTRICT2',
     symbol: 'D2',
     balance: '0',
     usdBalance: '0',
@@ -61,7 +61,7 @@ export const priceFeedData = [
   },
   {
     id: '2',
-    name: 'District 3',
+    name: 'DISTRICT3',
     symbol: 'D3',
     balance: '0',
     usdBalance: '0',
@@ -85,7 +85,7 @@ export const priceFeedData = [
   },
   {
     id: '3',
-    name: 'District 4',
+    name: 'DISTRICT4',
     symbol: 'D4',
     balance: '0',
     usdBalance: '0',
