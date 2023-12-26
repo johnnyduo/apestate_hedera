@@ -13,7 +13,7 @@ export const NFTList = [
     image: NFT1,
     name: 'DISTRICT 1',
     collection: 'HCMC, VN',
-    price: '4000 USDT',
+    price: '4000 USDC',
   },
   {
     id: 2,
@@ -22,7 +22,7 @@ export const NFTList = [
     image: NFT2,
     name: 'DISTRICT 2',
     collection: 'HCMC, VN',
-    price: '3000 USDT',
+    price: '3000 USDC',
   },
   {
     id: 3,
@@ -31,7 +31,7 @@ export const NFTList = [
     image: NFT3,
     name: 'DISTRICT 3',
     collection: 'HCMC, VN',
-    price: '2200 USDT',
+    price: '2200 USDC',
   },
   {
     id: 4,
@@ -40,7 +40,7 @@ export const NFTList = [
     image: NFT4,
     name: 'DISTRICT 4',
     collection: 'HCMC, VN',
-    price: '1600 USDT',
+    price: '1600 USDC',
   },
   {
     id: 5,
@@ -49,7 +49,7 @@ export const NFTList = [
     image: NFT2,
     name: 'DISTRICT 2',
     collection: 'HCMC, VN',
-    price: '3000 USDT',
+    price: '3000 USDC',
   },
   {
     id: 6,
@@ -58,6 +58,6 @@ export const NFTList = [
     image: NFT5,
     name: 'DISTRICT 5',
     collection: 'HCMC, VN',
-    price: '1400 USDT',
+    price: '1400 USDC',
   },
 ];

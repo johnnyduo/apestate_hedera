@@ -131,7 +131,7 @@ export default function ComparisonChart() {
                   toggleCoin ? 'flex-row-reverse' : 'flex-row'
                 )}
               >
-                <span>PYT</span>/<span>ETH</span>
+                <span>D1</span>/<span>USDC</span>
               </span>
               <Button
                 size="mini"
