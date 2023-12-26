@@ -96,7 +96,7 @@ export default function MinimalScreen() {
                   My Balance
                 </h3>
                 <div className="mb-7 text-center font-medium tracking-tighter text-gray-900 dark:text-white xl:text-2xl 3xl:mb-8 3xl:text-[32px]">
-                  {parseFloat(balance || '0').toFixed(4)} ETH
+                  {usdBalance.toFixed(0)} $
                 </div>
               </div>
               <span className="-mx-6 block border-t border-dashed border-t-gray-200 dark:border-t-gray-700 3xl:-mx-8" />

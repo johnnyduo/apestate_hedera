@@ -155,7 +155,7 @@ export default function ComparisonChart() {
                 toggleCoin ? 'flex-row-reverse' : 'flex-row'
               )}
             >
-              <span>ETH</span>/
+              <span>USD</span>/
               <span>
                 m<sup>2</sup>
               </span>

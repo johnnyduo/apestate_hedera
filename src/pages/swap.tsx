@@ -223,7 +223,7 @@ const SwapPage: NextPageWithLayout = () => {
           >
             <CoinInput
               label={toggleCoin ? 'To' : 'From'}
-              balance={usdBalance.toFixed(2)}
+              balance={usdBalance.toFixed(0)}
               defaultCoinIndex={0}
               isUSD={true}
               value={usdValueText}

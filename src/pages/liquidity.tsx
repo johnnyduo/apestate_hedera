@@ -207,7 +207,7 @@ const LiquidityPage: NextPageWithLayout = () => {
           <div className="relative flex flex-col gap-3">
             <CoinInput
               label={'From'}
-              balance={usdBalance.toFixed(2)}
+              balance={usdBalance.toFixed(0)}
               defaultCoinIndex={0}
               isUSD={true}
               value={usdValueText}
