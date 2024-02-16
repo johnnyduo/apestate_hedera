@@ -25,30 +25,7 @@ export interface ContractData {
   lastUpdatedAt: number;
 }
 
-const SYMBOL_CONTRACT_DATA = [
-  'D1',
-  'D2',
-  'D3',
-  'D4',
-  'D5',
-  'D6',
-  'D7',
-  'D8',
-  'D9',
-  'D10',
-  'D11',
-  'D12',
-  'BINHC',
-  'CAN',
-  'GO',
-  'HOC',
-  'NHA',
-  'THU',
-  'BINH',
-  'TANP',
-  'TANB',
-  'CU',
-];
+const SYMBOL_CONTRACT_DATA = ['PYT', 'TLR', 'LPO', 'STN'];
 
 const DEFAULT_CONTRACT_DATA: ContractData[] = SYMBOL_CONTRACT_DATA.map(
   (symbol) => ({
@@ -100,7 +77,7 @@ export const ExchangePolygon = new ethers.Contract(
   polygonProvider
 );
 
-const TOKEN_LENGTH = 22;
+const TOKEN_LENGTH = 4;
 
 export async function fetchContractData(address: string) {
   const promises = [];

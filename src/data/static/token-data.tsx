@@ -9,7 +9,7 @@ import { Doge } from '@/components/icons/doge';
 export const TopTokensData = [
   {
     icon: <Bitcoin />,
-    code: 'D1',
+    code: 'PYT',
     name: 'PhayaThai',
     volume: '256.5M',
   },
@@ -21,13 +21,13 @@ export const TopTokensData = [
   },
   {
     icon: <Tether />,
-    code: 'D3',
+    code: 'TLR',
     name: 'Thonglor',
     volume: '566.2M',
   },
   {
     icon: <Bnb />,
-    code: 'D4',
+    code: 'STN',
     name: 'Sathorn',
     volume: '396.4M',
   },
@@ -39,7 +39,7 @@ export const TopTokensData = [
   },
   {
     icon: <Cardano />,
-    code: 'D5',
+    code: 'LPO',
     name: 'LatPrao',
     volume: '267.3M',
   },
@@ -53,32 +53,32 @@ export const TopTokensData = [
 
 export const TopPoolsData = [
   {
-    from: 'D1',
+    from: 'PYT',
     to: 'USDC',
     volume: '434.2M',
   },
   {
-    from: 'D2',
+    from: 'TLR',
     to: 'USDC',
     volume: '356.4M',
   },
   {
-    from: 'D3',
+    from: 'LPO',
     to: 'USDC',
     volume: '295.6M',
   },
   {
-    from: 'D4',
+    from: 'STN',
     to: 'USDC',
     volume: '402.5M',
   },
   {
-    from: 'D5',
+    from: 'TLR',
     to: 'USDC',
     volume: '590.2M',
   },
   {
-    from: 'D6',
+    from: 'PYT',
     to: 'USDC',
     volume: '104.6M',
   },

@@ -58,10 +58,10 @@ export default function OverviewChart({ chartWrapperClass }: Props) {
       )}
     >
       <h3 className="text-xl font-medium tracking-tighter text-white sm:text-3xl">
-        24,325 VND/USD
+        36.02 THB/USD
       </h3>
       <p className="mt-2 mb-1 text-xs font-medium text-gray-400 sm:text-sm">
-        Last week: 24,100 VND/USD
+        Last week: 35.58 THB/USD
       </p>
       <div className={cn('h-60 w-full', chartWrapperClass)}>
         <ResponsiveContainer width="100%" height="100%">
