@@ -14,7 +14,7 @@ import ExchangeABI from './abis/LandPriceExchange.json';
 import { WalletContext } from './hooks/use-connect';
 import { useInterval } from 'usehooks-ts';
 
-export let CURREX = 1;
+export let CURREX = 0.028;
 
 export interface ContractData {
   landId: number;

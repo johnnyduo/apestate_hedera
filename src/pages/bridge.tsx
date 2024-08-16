@@ -18,7 +18,6 @@ import RootLayout from '@/layouts/_root-layout';
 import useContractData from '@/lib/hooks/use-contract-data';
 import { ethers } from 'ethers';
 import {
-  THBUSD,
   executeBridge,
   executeBuy,
   executeDraw,
@@ -38,6 +37,7 @@ import { Ethereum } from '@/components/icons/ethereum';
 import { Polygon } from '@/components/icons/polygon';
 
 const EXCHANGE_FEE = 30.1 / 10000;
+const THBUSD = 1;
 
 interface LongPosition {
   landId: number;
