@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg id="Layer_1" data-name="Layer 1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 143 24">
+  <defs>
+    <style>
+      .cls-1 {
+        fill: #fff;
+        font-family: MyriadPro-Regular, 'Myriad Pro';
+        font-size: 31px;
+      }
+
+      .cls-2 {
+        letter-spacing: -.08em;
+      }
+
+      .cls-3 {
+        letter-spacing: -.08em;
+      }
+    </style>
+  </defs>
+  <text class="cls-1" transform="translate(2.6 22.32)"><tspan x="0" y="0">APES</tspan><tspan class="cls-2" x="66" y="0">T</tspan><tspan class="cls-3" x="79.08" y="0">A</tspan><tspan x="95.67" y="0">TE</tspan></text>
+</svg>
