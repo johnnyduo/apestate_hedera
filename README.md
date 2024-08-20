@@ -2,6 +2,11 @@
 
 This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app)
 
+## Hedera Contract Addresses
+* **ApeStateExchange:** [0xa02B1fDAE204DeaEee1b906C50A976726a8CA164](https://hashscan.io/testnet/contract/0.0.4686681)
+* **ApeStateOracle:** [0x9e655A1562af64ef3c7f2d57cEB5FECEb2097C29](https://hashscan.io/testnet/contract/0.0.4686679)
+* **MockUSDC:** [0xbac2BD494eE8b27939Cd586D193D2b67E86a4e16](https://hashscan.io/testnet/contract/0.0.4686678)
+
 ## Getting Started 
 
 First, run the development server:
